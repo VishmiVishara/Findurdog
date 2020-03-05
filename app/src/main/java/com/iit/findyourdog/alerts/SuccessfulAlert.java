@@ -8,12 +8,12 @@ import android.widget.Button;
 
 import com.iit.findyourdog.R;
 
-public class successfulAlert extends Dialog {
+public class SuccessfulAlert extends Dialog {
 
     private Activity current;
     private Button btnSuccess;
 
-    public successfulAlert(Activity current) {
+    public SuccessfulAlert(Activity current) {
         super(current);
         this.current = current;
     }
@@ -28,7 +28,7 @@ public class successfulAlert extends Dialog {
             @Override
             public void onClick(View view) {
 
-                successfulAlert.this.dismiss();
+                SuccessfulAlert.this.dismiss();
             }
         });
 

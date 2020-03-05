@@ -18,11 +18,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initializeUIComponents();
+        initializeListeners();
+
+    }
+
+
+    private void initializeUIComponents() {
         btnBreed        =   findViewById(R.id.btnBreed);
         btnDog          =   findViewById(R.id.btnDog);
         btnSearchBreeds =   findViewById(R.id.btnSearchBreeds);
+    }
 
+    private void initializeListeners() {
 
+        // Identify the Breed
         btnBreed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,5 +42,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // Identify the Dog
+        btnDog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), IdentifyTheDogActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 }

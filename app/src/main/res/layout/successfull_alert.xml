@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="#FFEB3B"
+    android:background="#5CFFEB3B"
     android:orientation="vertical">
 
 
@@ -34,7 +34,7 @@
         android:layout_width="260dp"
         android:layout_height="47dp"
         android:layout_marginTop="24dp"
-        android:background="#FF5722"
+        android:background="#FFC107"
         android:text="@android:string/ok"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"

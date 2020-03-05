@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.iit.findyourdog.alerts.WarningAlert;
-import com.iit.findyourdog.alerts.successfulAlert;
+import com.iit.findyourdog.alerts.SuccessfulAlert;
 import com.iit.findyourdog.util.AppUtils;
 import com.iit.findyourdog.util.CustomAdapter;
 import com.iit.findyourdog.util.DogBreeds;
@@ -37,13 +37,13 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_identify_the_breed);
 
         // bind UI components
-        createUIComponents();
+        initializeUIComponents();
 
     }
 
-    private void createUIComponents() {
+    private void initializeUIComponents() {
         imageView = findViewById(R.id.imageDog);
-        btnSubmit = findViewById(R.id.buttonSubmit);
+        btnSubmit = findViewById(R.id.btnSubmitDog);
         spinner = findViewById(R.id.spinner);
         labelStatus = findViewById(R.id.labelStatus);
         labelAnswer = findViewById(R.id.labelAnswer);
@@ -77,10 +77,10 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
                     if (selectedItem.toLowerCase().equals(randomBreedName)) {
                         System.out.println("Correct!!");
-                        successfulAlert successfulAlert =
-                                new successfulAlert(IdentifyTheBreedActivity.this);
+                        SuccessfulAlert successfulAlert =
+                                new SuccessfulAlert(IdentifyTheBreedActivity.this);
                         successfulAlert.show();
-                        labelStatus.setText("Tour Answer \" " + selectedItem + " \" is CORRECT!!" );
+                        labelStatus.setText("Great! Answer \" " + selectedItem + " \" is CORRECT!!" );
                         labelStatus.setTextColor(Color.GREEN);
 
                         labelAnswer.setText("CORRECT BREED: "
@@ -92,7 +92,7 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
                         WarningAlert warningAlert =
                                 new WarningAlert(IdentifyTheBreedActivity.this);
                         warningAlert.show();
-                        labelStatus.setText("Your Answer \"" + selectedItem + " \" is WRONG!");
+                        labelStatus.setText("Sorry! Answer \"" + selectedItem + " \" is WRONG!");
                         labelStatus.setTextColor(Color.RED);
 
                         labelAnswer.setText("CORRECT BREED: "
