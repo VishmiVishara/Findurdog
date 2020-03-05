@@ -9,7 +9,7 @@ import java.util.Random;
 public class DogBreeds {
 
     private static DogBreeds dogBreeds = new DogBreeds();
-    public List<String> dogBreedsList = new ArrayList() {{
+    private List<String> dogBreedsList = new ArrayList() {{
         add("goldenretriever");
         add("beagle");
         add("redbone");
@@ -26,6 +26,10 @@ public class DogBreeds {
         add("cairn");
         add("shihtzu");
     }};
+
+    public List<String> getDogBreedsList() {
+        return dogBreedsList;
+    }
 
     private List<Integer> imageIndexList = new ArrayList<>();
     private List<Integer> breedIndexList = new ArrayList<>();
