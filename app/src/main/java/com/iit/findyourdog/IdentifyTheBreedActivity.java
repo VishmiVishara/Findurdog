@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.iit.findyourdog.alerts.WarningAlert;
 import com.iit.findyourdog.alerts.successfulAlert;
@@ -81,18 +80,22 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
                         successfulAlert successfulAlert =
                                 new successfulAlert(IdentifyTheBreedActivity.this);
                         successfulAlert.show();
-                        labelStatus.setText("CORRECT!!" );
+                        labelStatus.setText("Tour Answer \" " + selectedItem + " \" is CORRECT!!" );
                         labelStatus.setTextColor(Color.GREEN);
+
+                        labelAnswer.setText("CORRECT BREED: "
+                                + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName));
+                        labelAnswer.setTextColor(Color.BLUE);
 
                     } else {
                         System.out.println("Wrong!!");
                         WarningAlert warningAlert =
                                 new WarningAlert(IdentifyTheBreedActivity.this);
                         warningAlert.show();
-                        labelStatus.setText("WRONG!!");
+                        labelStatus.setText("Your Answer \"" + selectedItem + " \" is WRONG!");
                         labelStatus.setTextColor(Color.RED);
 
-                        labelAnswer.setText("CORRECT ANSWER: "
+                        labelAnswer.setText("CORRECT BREED: "
                                 + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName));
                         labelAnswer.setTextColor(Color.BLUE);
                     }
