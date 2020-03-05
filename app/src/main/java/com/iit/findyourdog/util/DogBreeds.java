@@ -3,13 +3,15 @@ package com.iit.findyourdog.util;
 import com.iit.findyourdog.config.Config;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class DogBreeds {
 
     private static DogBreeds dogBreeds = new DogBreeds();
-    private List<String> dogBreedsList = new ArrayList() {{
+    private List<String> dogBreedsList = new ArrayList<String>() {{
         add("goldenretriever");
         add("beagle");
         add("redbone");
@@ -23,12 +25,57 @@ public class DogBreeds {
         add("collie");
         add("labradorretriever");
         add("lhasa");
-        add("cairn");
+        add("kuvasz");
         add("shihtzu");
     }};
 
-    public List<String> getDogBreedsList() {
-        return dogBreedsList;
+    private List<String> showBreeds = new ArrayList<String>() {{
+        add("Golden Retriever");
+        add("Beagle");
+        add("Redbone");
+        add("Cairn");
+        add("Cardigan");
+        add("Chow");
+        add("Pomeranian");
+        add("Great Pyrenees");
+        add("EntleBucher");
+        add("Appenzeller");
+        add("Collie");
+        add("Labrador Retriever");
+        add("Lhasa");
+        add("Kuvasz");
+        add("Shih Tzu");
+        add("SELECT A BREED..");
+
+    }};
+
+    private Map<String, String> dogBreedMap = new HashMap<String,String>(){
+        {
+            put("goldenretriever", "Golden Retriever");
+            put("beagle", "Beagle");
+            put("redbone", "Redbone");
+            put("cairn", "Cairn");
+            put("cardigan", "Cardigan");
+            put("chow", "Chow");
+            put("pomeranian", "Pomeranian");
+            put("greatpyrenees", "Great Pyrenees");
+            put("entlebucher", "EntleBucher");
+            put("appenzeller", "Appenzeller");
+            put("collie", "Collie");
+            put("labradorretriever", "Labrador Retriever");
+            put("lhasa", "Lhasa");
+            put("kuvasz", "Kuvasz");
+            put("shihtzu", "Shih Tzu");
+
+        }
+    };
+
+    public Map<String, String> getDogBreedMap() {
+        return dogBreedMap;
+    }
+
+    public List<String> getShowBreeds() {
+        return showBreeds;
     }
 
     private List<Integer> imageIndexList = new ArrayList<>();

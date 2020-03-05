@@ -1,65 +1,100 @@
 package com.iit.findyourdog;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.iit.findyourdog.alerts.WarningAlert;
 import com.iit.findyourdog.alerts.successfulAlert;
 import com.iit.findyourdog.util.AppUtils;
-import com.iit.findyourdog.util.CustomizedOnItemSelectedListener;
+import com.iit.findyourdog.util.CustomAdapter;
 import com.iit.findyourdog.util.DogBreeds;
 
 public class IdentifyTheBreedActivity extends AppCompatActivity {
 
-    ArrayAdapter<String> dataAdapter;
-    boolean btnSubmitState = false;
     private ImageView imageView;
     private Button btnSubmit;
     private Spinner spinner;
+    private TextView labelStatus;
+    private TextView labelAnswer;
+
+    private CustomAdapter dataAdapter = null;
+    private boolean btnSubmitState = false;
     private String randomBreedName = null;
+    private String imageName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identify_the_breed);
 
+        // bind UI components
+        createUIComponents();
+
+    }
+
+    private void createUIComponents() {
         imageView = findViewById(R.id.imageDog);
         btnSubmit = findViewById(R.id.buttonSubmit);
         spinner = findViewById(R.id.spinner);
+        labelStatus = findViewById(R.id.labelStatus);
+        labelAnswer = findViewById(R.id.labelAnswer);
+
+        // initializing Listeners
+        initializeListeners();
 
         setImageToView();
         createDropDownList();
+    }
 
+    private void initializeListeners() {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!btnSubmitState) {
-                    addListenerOnSpinnerItemSelection();
-                    if (spinner.getSelectedItem() == null) {
+                    if (spinner.getSelectedItem().equals("SELECT A BREED..")) {
                         Toast.makeText(getApplicationContext(),
                                 "Please select a breed", Toast.LENGTH_SHORT).show();
+                        return;
                     }
 
                     String selectedItem = (String) spinner.getSelectedItem();
-                    System.out.println("User selected Option" + selectedItem);
-                    System.out.println("############################" + randomBreedName);
+                    System.out.println("Random Generated Breed: " + randomBreedName);
+                    System.out.println("User selected Option: " + selectedItem);
+
+                    selectedItem = selectedItem.replaceAll("\\s+","");
+                    System.out.println(selectedItem);
+                    System.out.println(selectedItem.toLowerCase().equals(randomBreedName));
+
+
                     if (selectedItem.toLowerCase().equals(randomBreedName)) {
+                        System.out.println("Correct!!");
                         successfulAlert successfulAlert =
                                 new successfulAlert(IdentifyTheBreedActivity.this);
                         successfulAlert.show();
-                    }
-                    else{
+                        labelStatus.setText("CORRECT!!" );
+                        labelStatus.setTextColor(Color.GREEN);
+
+                    } else {
+                        System.out.println("Wrong!!");
                         WarningAlert warningAlert =
                                 new WarningAlert(IdentifyTheBreedActivity.this);
                         warningAlert.show();
+                        labelStatus.setText("WRONG!!");
+                        labelStatus.setTextColor(Color.RED);
+
+                        labelAnswer.setText("CORRECT ANSWER: "
+                                + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName));
+                        labelAnswer.setTextColor(Color.BLUE);
                     }
 
                     spinner.setEnabled(false);
@@ -77,27 +112,21 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
             }
 
         });
-
     }
 
     protected void createDropDownList() {
-        dataAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, DogBreeds.getInstance().getDogBreedsList());
-        spinner.setSelection(-1);
+        dataAdapter = new CustomAdapter(this,
+                android.R.layout.simple_spinner_item, DogBreeds.getInstance().getShowBreeds());
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
+        spinner.setSelection(dataAdapter.getCount());
+
     }
 
     private void setImageToView() {
         randomBreedName = DogBreeds.getInstance().getRandomBreed();
-        final String imageName = DogBreeds.getInstance().getRandomImage(randomBreedName);
+        imageName = DogBreeds.getInstance().getRandomImage(randomBreedName);
         imageView.setImageDrawable(AppUtils.getDrawable(this, imageName));
-    }
-
-
-    public void addListenerOnSpinnerItemSelection() {
-        spinner.setOnItemSelectedListener(new CustomizedOnItemSelectedListener());
-
     }
 }
 
