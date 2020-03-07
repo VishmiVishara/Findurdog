@@ -56,37 +56,38 @@ public class SearchDogBreedsActivity extends AppCompatActivity {
         search.setAdapter(adapter);
         initializeListeners();
 
-        btnStop.setVisibility(View.VISIBLE);
+
+        btnStop.setEnabled(false);
+        search.setEnabled(true);
     }
 
     private void setSlider() {
         reset();
 
         String searchedBreedName = search.getText().toString();
-        if (searchedBreedName == null || searchedBreedName.isEmpty() || searchedBreedName.equals("SELECT A BREED..")) {
+        if ( searchedBreedName.isEmpty()) {
             slider.setVisibility(View.INVISIBLE);
-
+            btnStop.setEnabled(false);
+            search.setEnabled(true);
             Toast.makeText(getApplicationContext(), "Sorry! Please Type Breed Name!", Toast.LENGTH_SHORT).show();
             if (sliderAdapter != null) {
                 sliderAdapter.notifyDataSetChanged();
             }
-            btnStop.setEnabled(false);
-            btnStop.setClickable(false);
-            search.setEnabled(true);
             return;
         }
 
         if (!DogBreeds.getInstance().getShowBreeds().contains(searchedBreedName)) {
-            slider.setVisibility(View.INVISIBLE);
 
+            slider.setVisibility(View.INVISIBLE);
+            btnStop.setEnabled(false);
+            search.setEnabled(true);
             Toast.makeText(getApplicationContext(), "Sorry! Please Type a Valid Breed Name!", Toast.LENGTH_SHORT).show();
+            btnStop.setEnabled(false);
             if (sliderAdapter != null) {
                 sliderAdapter.notifyDataSetChanged();
             }
 
-            btnStop.setEnabled(false);
-            btnStop.setClickable(false);
-            search.setEnabled(true);
+
             return;
         }
         slider.setVisibility(View.VISIBLE);
@@ -114,29 +115,26 @@ public class SearchDogBreedsActivity extends AppCompatActivity {
         btnSearchBreed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setSlider();
                 search.setEnabled(false);
                 btnStop.setEnabled(true);
                 btnStop.setClickable(true);
+                setSlider();
             }
         });
-
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopTimer();
                 search.setEnabled(true);
                 btnStop.setEnabled(false);
                 btnStop.setClickable(false);
+                stopTimer();
 
             }
         });
-
         btnStop.setEnabled(false);
         btnStop.setClickable(false);
 
     }
-
 
     private void stopTimer() {
         if (swipeTimer != null) {
