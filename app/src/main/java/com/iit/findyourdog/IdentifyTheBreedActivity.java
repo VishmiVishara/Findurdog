@@ -1,7 +1,6 @@
 package com.iit.findyourdog;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -27,11 +26,9 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
     private ImageView imageView;
     private Button btnSubmit;
     private Spinner spinner;
-    private TextView labelStatus;
-    private TextView labelAnswer;
     private ProgressBar progressBar;
     private TextView txtCount;
-    private ConstraintLayout timerConstriantLayout;
+    private ConstraintLayout timerConstraintLayout;
 
     private CustomAdapter dataAdapter = null;
     private boolean btnSubmitState = false;
@@ -54,19 +51,17 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageDog);
         btnSubmit = findViewById(R.id.btnSubmitDog);
         spinner = findViewById(R.id.spinner);
-        labelStatus = findViewById(R.id.labelStatus);
-        labelAnswer = findViewById(R.id.labelAnswer);
         progressBar = findViewById(R.id.progressCircular);
         txtCount = findViewById(R.id.txtCount);
-        timerConstriantLayout = findViewById(R.id.constraintLayoutTimer);
+        timerConstraintLayout = findViewById(R.id.constraintLayoutTimer);
 
         setImageToView();
         createDropDownList();
 
         if(Config.TIMER_GAME_MODE == 0) {
-            timerConstriantLayout.setVisibility((View.GONE));
+            timerConstraintLayout.setVisibility((View.GONE));
         }else {
-            timerConstriantLayout.setVisibility((View.VISIBLE));
+            timerConstraintLayout.setVisibility((View.VISIBLE));
             setupTimer();
         }
 
@@ -136,7 +131,7 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
                 if(Config.TIMER_GAME_MODE == 1){
                     Toast.makeText(getApplicationContext(),
                             "Time Out", Toast.LENGTH_SHORT).show();
-                    timerConstriantLayout.setVisibility(View.GONE);
+                    timerConstraintLayout.setVisibility(View.GONE);
                     spinner.setEnabled(false);
                     spinner.setClickable(false);
                     btnSubmit.setText("Next");
@@ -159,7 +154,7 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
                 SuccessfulAlert successfulAlert =
                         new SuccessfulAlert(IdentifyTheBreedActivity.this);
                 successfulAlert.show();
-                timerConstriantLayout.setVisibility(View.GONE);
+                timerConstraintLayout.setVisibility(View.GONE);
 //                labelStatus.setText("Great! Answer \" " + selectedItem + " \" is CORRECT!!");
 //                labelStatus.setTextColor(Color.GREEN);
 
@@ -172,7 +167,7 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
                 WarningAlert warningAlert =
                         new WarningAlert(IdentifyTheBreedActivity.this);
                 warningAlert.show();
-                timerConstriantLayout.setVisibility(View.GONE);
+                timerConstraintLayout.setVisibility(View.GONE);
 //                labelStatus.setText("Sorry! Answer \"" + selectedItem + " \" is WRONG!");
 //                labelStatus.setTextColor(Color.RED);
 //

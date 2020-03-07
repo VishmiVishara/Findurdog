@@ -3,9 +3,11 @@ package com.iit.findyourdog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,9 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     private ConstraintLayout imageOneBorder;
     private ConstraintLayout imageTwoBorder;
     private ConstraintLayout imageThreeBorder;
+    private ProgressBar progressBar;
+    private TextView txtCount;
+    private ConstraintLayout timerConstriantLayout;
 
     private List<String> randomGeneratedBreedList = new ArrayList<>();
     private List<ImageView> imageViewList = new ArrayList<>();
@@ -38,6 +43,8 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     private int randomPickedHeadingIndex = 0;
     private boolean btnSubmitState = false;
     private int selectedImageIndex = -1;
+    private CountDownTimer timer;
+    private int progress = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,5 +178,29 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
 
 
         }
+    }
+
+    private void setupTimer() {
+        progressBar.setProgress(0);
+        timer = new CountDownTimer(10000, 1000) {
+            @Override
+            public void onTick(long l) {
+
+                progress--;
+                System.out.println(progress);
+                progressBar.setProgress(progress * 100 / (10000 / 1000));
+                txtCount.setText(progress + "");
+            }
+
+            @Override
+            public void onFinish() {
+
+                progress++;
+                progressBar.setProgress(0);
+                playDogBreed(1);
+            }
+        };
+
+        timer.start();
     }
 }
