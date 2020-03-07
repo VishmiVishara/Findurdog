@@ -13,10 +13,10 @@
         android:layout_height="0dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".15"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintHeight_percent=".3"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayoutImages"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
 
         <ProgressBar
             android:id="@+id/progressCircularDog"
@@ -34,19 +34,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintWidth_percent="0.3" />
+            app:layout_constraintWidth_percent="0.26" />
 
         <TextView
             android:id="@+id/txtCountDog"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text=""
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayoutTimerDog"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/constraintLayoutTimerDog"
             app:layout_constraintTop_toTopOf="@+id/constraintLayoutTimerDog"
             app:layout_constraintVertical_bias="0.0" />
@@ -57,11 +58,14 @@
         android:id="@+id/constraintLayoutImages"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+
+        android:layout_marginBottom="16dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutSubmitButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".6"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout6"
@@ -233,11 +237,11 @@
         android:id="@+id/constraintLayoutSubmitButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHeight_percent=".25"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHeight_percent=".5"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayoutImages">
 
         <Button
             android:id="@+id/btnSubmitDog"

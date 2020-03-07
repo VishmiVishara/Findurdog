@@ -51,9 +51,9 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageDog);
         btnSubmit = findViewById(R.id.btnSubmitDog);
         spinner = findViewById(R.id.spinner);
-        progressBar = findViewById(R.id.progressCircular);
-        txtCount = findViewById(R.id.txtCount);
-        timerConstraintLayout = findViewById(R.id.constraintLayoutTimer);
+        progressBar = findViewById(R.id.progressCircularBreed);
+        txtCount = findViewById(R.id.txtCountBreed);
+        timerConstraintLayout = findViewById(R.id.constraintLayoutTimerBreed);
 
         setImageToView();
         createDropDownList();
@@ -140,6 +140,12 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
                 return;
             }
 
+            if (Config.TIMER_GAME_MODE == 1) {
+                progressBar.setVisibility(View.INVISIBLE);
+                timer.cancel();
+                txtCount.setVisibility(View.INVISIBLE);
+            }
+
             String selectedItem = (String) spinner.getSelectedItem();
             System.out.println("Random Generated Breed: " + randomBreedName);
             System.out.println("User selected Option: " + selectedItem);
@@ -188,6 +194,12 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
             btnSubmitState = false;
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
     }
 
 }

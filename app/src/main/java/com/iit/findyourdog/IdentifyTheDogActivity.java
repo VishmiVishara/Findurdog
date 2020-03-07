@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.iit.findyourdog.alerts.SuccessfulAlert;
 import com.iit.findyourdog.alerts.WarningAlert;
+import com.iit.findyourdog.config.Config;
 import com.iit.findyourdog.util.AppUtils;
 import com.iit.findyourdog.util.DogBreeds;
 
@@ -35,7 +36,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     private ConstraintLayout imageThreeBorder;
     private ProgressBar progressBar;
     private TextView txtCount;
-    private ConstraintLayout timerConstriantLayout;
+    private ConstraintLayout timerConstraintLayout;
 
     private List<String> randomGeneratedBreedList = new ArrayList<>();
     private List<ImageView> imageViewList = new ArrayList<>();
@@ -52,6 +53,14 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_identify_the_dog);
 
         initializeTheUIComponents();
+
+        if (Config.TIMER_GAME_MODE == 0) {
+            timerConstraintLayout.setVisibility((View.GONE));
+        } else {
+            timerConstraintLayout.setVisibility((View.VISIBLE));
+            setupTimer();
+        }
+
     }
 
     private void initializeTheUIComponents() {
@@ -63,6 +72,9 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         imageOneBorder = findViewById(R.id.conImageOne);
         imageTwoBorder = findViewById(R.id.conImageTwo);
         imageThreeBorder = findViewById(R.id.conImageThree);
+        progressBar = findViewById(R.id.progressCircularDog);
+        txtCount = findViewById(R.id.txtCountDog);
+        timerConstraintLayout = findViewById(R.id.constraintLayoutTimerDog);
 
 
         //clear image view and random images list
@@ -84,20 +96,37 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
 
     }
 
-    private void initializeListeners() {
+    private void playTimerGameMode(int val) {
         if (!btnSubmitState) {
             //validate user is select a image or not
             if (selectedImageIndex == -1) {
-                Toast.makeText(getApplicationContext(),
-                        "Please Select an Image!", Toast.LENGTH_SHORT).show();
-                return;
+                if (Config.TIMER_GAME_MODE == 0) {
+                    Toast.makeText(getApplicationContext(),
+                            "Please Select an Image!", Toast.LENGTH_SHORT).show();
+                }
+
+                if (Config.TIMER_GAME_MODE == 1) {
+                    Toast.makeText(getApplicationContext(),
+                            "Time Out", Toast.LENGTH_SHORT).show();
+                    imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.BLUE);
+                    timerConstraintLayout.setVisibility(View.GONE);
+                    btnSubmit.setText("Next");
+                    btnSubmitState = true;
+                }
             }
+
+            if (Config.TIMER_GAME_MODE == 1) {
+                progressBar.setVisibility(View.INVISIBLE);
+                timer.cancel();
+                txtCount.setVisibility(View.INVISIBLE);
+            }
+
             if (selectedImageIndex == randomPickedHeadingIndex) {
                 SuccessfulAlert identifyBreedCorrectMessage = new SuccessfulAlert(IdentifyTheDogActivity.this);
                 identifyBreedCorrectMessage.show();
 
                 imageBorderedList.get(selectedImageIndex).setBackgroundColor(Color.GREEN);
-            } else {
+            } else if (selectedImageIndex != randomPickedHeadingIndex && selectedImageIndex != -1) {
                 WarningAlert identifyBreedWrongMessage = new WarningAlert(IdentifyTheDogActivity.this);
                 identifyBreedWrongMessage.show();
 
@@ -106,6 +135,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
             }
             btnSubmit.setText("Next");
             btnSubmitState = true;
+
         } else if (btnSubmitState) {
             Intent intent = getIntent();
             finish();
@@ -172,7 +202,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
 
             case R.id.btnSubmitDog:
 
-                initializeListeners();
+                playTimerGameMode(0);
 
                 break;
 
@@ -194,13 +224,19 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
 
             @Override
             public void onFinish() {
-
                 progress++;
                 progressBar.setProgress(0);
-                playDogBreed(1);
+                selectedImageIndex = -1;
+                playTimerGameMode(1);
             }
         };
 
         timer.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
     }
 }
