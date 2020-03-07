@@ -3,17 +3,21 @@ package com.iit.findyourdog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.iit.findyourdog.alerts.WarningAlert;
 import com.iit.findyourdog.alerts.SuccessfulAlert;
+import com.iit.findyourdog.alerts.WarningAlert;
+import com.iit.findyourdog.config.Config;
 import com.iit.findyourdog.util.AppUtils;
 import com.iit.findyourdog.util.CustomAdapter;
 import com.iit.findyourdog.util.DogBreeds;
@@ -25,11 +29,16 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
     private Spinner spinner;
     private TextView labelStatus;
     private TextView labelAnswer;
+    private ProgressBar progressBar;
+    private TextView txtCount;
+    private ConstraintLayout timerConstriantLayout;
 
     private CustomAdapter dataAdapter = null;
     private boolean btnSubmitState = false;
     private String randomBreedName = null;
     private String imageName = null;
+    private CountDownTimer timer;
+    private int progress = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,74 +56,33 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spinner);
         labelStatus = findViewById(R.id.labelStatus);
         labelAnswer = findViewById(R.id.labelAnswer);
+        progressBar = findViewById(R.id.progressCircular);
+        txtCount = findViewById(R.id.txtCount);
+        timerConstriantLayout = findViewById(R.id.constraintLayoutTimer);
+
+        setImageToView();
+        createDropDownList();
+
+        if(Config.TIMER_GAME_MODE == 0) {
+            timerConstriantLayout.setVisibility((View.GONE));
+        }else {
+            timerConstriantLayout.setVisibility((View.VISIBLE));
+            setupTimer();
+        }
 
         // initializing Listeners
         initializeListeners();
 
-        setImageToView();
-        createDropDownList();
     }
 
     private void initializeListeners() {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!btnSubmitState) {
-                    if (spinner.getSelectedItem().equals("SELECT A BREED..")) {
-                        Toast.makeText(getApplicationContext(),
-                                "Please select a breed", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    String selectedItem = (String) spinner.getSelectedItem();
-                    System.out.println("Random Generated Breed: " + randomBreedName);
-                    System.out.println("User selected Option: " + selectedItem);
-
-                    selectedItem = selectedItem.replaceAll("\\s+","");
-                    System.out.println(selectedItem);
-                    System.out.println(selectedItem.toLowerCase().equals(randomBreedName));
-
-
-                    if (selectedItem.toLowerCase().equals(randomBreedName)) {
-                        System.out.println("Correct!!");
-                        SuccessfulAlert successfulAlert =
-                                new SuccessfulAlert(IdentifyTheBreedActivity.this);
-                        successfulAlert.show();
-                        labelStatus.setText("Great! Answer \" " + selectedItem + " \" is CORRECT!!" );
-                        labelStatus.setTextColor(Color.GREEN);
-
-                        labelAnswer.setText("CORRECT BREED: "
-                                + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName));
-                        labelAnswer.setTextColor(Color.BLUE);
-
-                    } else {
-                        System.out.println("Wrong!!");
-                        WarningAlert warningAlert =
-                                new WarningAlert(IdentifyTheBreedActivity.this);
-                        warningAlert.show();
-                        labelStatus.setText("Sorry! Answer \"" + selectedItem + " \" is WRONG!");
-                        labelStatus.setTextColor(Color.RED);
-
-                        labelAnswer.setText("CORRECT BREED: "
-                                + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName));
-                        labelAnswer.setTextColor(Color.BLUE);
-                    }
-
-                    spinner.setEnabled(false);
-                    spinner.setClickable(false);
-                    btnSubmit.setText("Next");
-                    btnSubmitState = true;
-
-                } else if (btnSubmitState) {
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
-                    btnSubmitState = false;
-                }
-
+                playDogBreed(0);
             }
-
         });
+
     }
 
     protected void createDropDownList() {
@@ -131,6 +99,104 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         imageName = DogBreeds.getInstance().getRandomImage(randomBreedName);
         imageView.setImageDrawable(AppUtils.getDrawable(this, imageName));
     }
+
+    private void setupTimer() {
+        progressBar.setProgress(0);
+        timer = new CountDownTimer(10000, 1000) {
+            @Override
+            public void onTick(long l) {
+
+                progress--;
+                System.out.println(progress);
+                progressBar.setProgress(progress * 100 / (10000 / 1000));
+                txtCount.setText(progress + "");
+            }
+
+            @Override
+            public void onFinish() {
+
+                progress++;
+                progressBar.setProgress(0);
+                playDogBreed(1);
+            }
+        };
+
+        timer.start();
+    }
+
+
+    private void playDogBreed(int val) {
+        if (!btnSubmitState) {
+            if (spinner.getSelectedItem().equals("SELECT A BREED..")) {
+                if(Config.TIMER_GAME_MODE == 0) {
+                    Toast.makeText(getApplicationContext(),
+                            "Please select a breed", Toast.LENGTH_SHORT).show();
+                }
+
+                if(Config.TIMER_GAME_MODE == 1){
+                    Toast.makeText(getApplicationContext(),
+                            "Time Out", Toast.LENGTH_SHORT).show();
+                    timerConstriantLayout.setVisibility(View.GONE);
+                    spinner.setEnabled(false);
+                    spinner.setClickable(false);
+                    btnSubmit.setText("Next");
+                    btnSubmitState = true;
+                }
+                return;
+            }
+
+            String selectedItem = (String) spinner.getSelectedItem();
+            System.out.println("Random Generated Breed: " + randomBreedName);
+            System.out.println("User selected Option: " + selectedItem);
+
+            selectedItem = selectedItem.replaceAll("\\s+", "");
+            System.out.println(selectedItem);
+            System.out.println(selectedItem.toLowerCase().equals(randomBreedName));
+
+
+            if (selectedItem.toLowerCase().equals(randomBreedName)) {
+                System.out.println("Correct!!");
+                SuccessfulAlert successfulAlert =
+                        new SuccessfulAlert(IdentifyTheBreedActivity.this);
+                successfulAlert.show();
+                timerConstriantLayout.setVisibility(View.GONE);
+//                labelStatus.setText("Great! Answer \" " + selectedItem + " \" is CORRECT!!");
+//                labelStatus.setTextColor(Color.GREEN);
+
+//                labelAnswer.setText("CORRECT BREED: "
+//                        + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName));
+//                labelAnswer.setTextColor(Color.BLUE);
+
+            } else {
+                System.out.println("Wrong!!");
+                WarningAlert warningAlert =
+                        new WarningAlert(IdentifyTheBreedActivity.this);
+                warningAlert.show();
+                timerConstriantLayout.setVisibility(View.GONE);
+//                labelStatus.setText("Sorry! Answer \"" + selectedItem + " \" is WRONG!");
+//                labelStatus.setTextColor(Color.RED);
+//
+//                labelAnswer.setText("CORRECT BREED: "
+//                        + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName));
+//                labelAnswer.setTextColor(Color.BLUE);
+            }
+
+            spinner.setEnabled(false);
+            spinner.setClickable(false);
+            btnSubmit.setText("Next");
+            btnSubmitState = true;
+
+        } else if (btnSubmitState) {
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+            btnSubmitState = false;
+        }
+
+    }
+
 }
+
+
 
 

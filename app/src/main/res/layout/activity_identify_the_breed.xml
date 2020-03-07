@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:background="#00E91E63"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintHeight_percent="0.5"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,9 +21,9 @@
             android:id="@+id/imageDog"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="32dp"
             android:gravity="center"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent=".8"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,14 +38,14 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHeight_percent="0.5"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayoutImageView"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutSpinner"
+            android:id="@+id/constraintLayoutTimer"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="#00E91E63"
@@ -54,6 +54,35 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/progressCircular"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="60"
+                android:progressDrawable="@drawable/progress"
+                android:rotation="-90"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintWidth_percent="0.3" />
+
+            <TextView
+                android:id="@+id/txtCount"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/progressCircular"
+                app:layout_constraintStart_toStartOf="@+id/progressCircular"
+                app:layout_constraintTop_toTopOf="@+id/progressCircular" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -64,7 +93,7 @@
             android:background="#00009688"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintHeight_percent="0.3"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -86,15 +115,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintTextView"
+            android:id="@+id/constraintSpinner"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayoutSubmitButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent=".3"
+            app:layout_constraintHeight_percent=".25"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutSpinner"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutTimer"
             app:layout_constraintVertical_bias="0.513">
 
             <Spinner
