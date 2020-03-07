@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button btnBreed;
@@ -49,6 +51,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), IdentifyTheDogActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        // Search Dog Breed
+        btnSearchBreeds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchDogBreedsActivity.class);
                 startActivity(intent);
             }
         });

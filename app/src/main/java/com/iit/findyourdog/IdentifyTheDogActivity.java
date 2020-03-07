@@ -32,13 +32,12 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     private ConstraintLayout imageTwoBorder;
     private ConstraintLayout imageThreeBorder;
 
-
     private List<String> randomGeneratedBreedList = new ArrayList<>();
     private List<ImageView> imageViewList = new ArrayList<>();
-    private List<ConstraintLayout> imageBorderesList = new ArrayList<>();
+    private List<ConstraintLayout> imageBorderedList = new ArrayList<>();
     private int randomPickedHeadingIndex = 0;
     private boolean btnSubmitState = false;
-    private int seletectedImageIndex = -1;
+    private int selectedImageIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,55 +66,45 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         imageViewList.add(imageTwo);
         imageViewList.add(imageThree);
 
-        imageBorderesList.add(imageOneBorder);
-        imageBorderesList.add(imageTwoBorder);
-        imageBorderesList.add(imageThreeBorder);
+        imageBorderedList.add(imageOneBorder);
+        imageBorderedList.add(imageTwoBorder);
+        imageBorderedList.add(imageThreeBorder);
 
 
+        btnSubmit.setOnClickListener(this);
         setImagesToView();
         setHeading();
 
     }
 
-    private void initializeListners() {
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!btnSubmitState) {
-                    //validate user is select a image or not
-                    if (seletectedImageIndex == -1) {
-                        Toast.makeText(getApplicationContext(),
-                                "Please Select an Image!", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    if (seletectedImageIndex == randomPickedHeadingIndex) {
-
-                        SuccessfulAlert identifyBreedCorrectMessage = new SuccessfulAlert(IdentifyTheDogActivity.this);
-                        identifyBreedCorrectMessage.show();
-
-                        imageBorderesList.get(randomPickedHeadingIndex).setBackgroundColor(Color.GREEN);
-
-
-                    } else {
-
-                        WarningAlert identifyBreedWrongMessage = new WarningAlert(IdentifyTheDogActivity.this);
-                        identifyBreedWrongMessage.show();
-
-                        imageBorderesList.get(seletectedImageIndex).setBackgroundColor(Color.RED);
-
-                    }
-                } else if (btnSubmitState) {
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
-                    btnSubmitState = false;
-                }
-
+    private void initializeListeners() {
+        if (!btnSubmitState) {
+            //validate user is select a image or not
+            if (selectedImageIndex == -1) {
+                Toast.makeText(getApplicationContext(),
+                        "Please Select an Image!", Toast.LENGTH_SHORT).show();
+                return;
             }
+            if (selectedImageIndex == randomPickedHeadingIndex) {
+                SuccessfulAlert identifyBreedCorrectMessage = new SuccessfulAlert(IdentifyTheDogActivity.this);
+                identifyBreedCorrectMessage.show();
 
-        });
+                imageBorderedList.get(selectedImageIndex).setBackgroundColor(Color.GREEN);
+            } else {
+                WarningAlert identifyBreedWrongMessage = new WarningAlert(IdentifyTheDogActivity.this);
+                identifyBreedWrongMessage.show();
 
+                imageBorderedList.get(selectedImageIndex).setBackgroundColor(Color.RED);
+                imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.GREEN);
+            }
+            btnSubmit.setText("Next");
+            btnSubmitState = true;
+        } else if (btnSubmitState) {
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+            btnSubmitState = false;
+        }
     }
 
     private void setImageToView(ImageView imageView, int position) {
@@ -154,7 +143,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
                 imageThreeBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageTwoBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageOneBorder.setBackgroundColor(Color.YELLOW);
-                randomPickedHeadingIndex = (int) imageOne.getTag();
+                selectedImageIndex = (int) imageOne.getTag();
 
                 break;
             case R.id.imageViewTwo:
@@ -162,7 +151,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
                 imageOneBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageThreeBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageTwoBorder.setBackgroundColor(Color.YELLOW);
-                randomPickedHeadingIndex = (int) imageTwo.getTag();
+                selectedImageIndex = (int) imageTwo.getTag();
 
                 break;
             case R.id.imageViewThree:
@@ -170,13 +159,13 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
                 imageOneBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageTwoBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageThreeBorder.setBackgroundColor(Color.YELLOW);
-                randomPickedHeadingIndex = (int) imageThree.getTag();
+                selectedImageIndex = (int) imageThree.getTag();
 
                 break;
 
             case R.id.btnSubmitDog:
 
-                initializeListners();
+                initializeListeners();
 
                 break;
 
