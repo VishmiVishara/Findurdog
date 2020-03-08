@@ -123,19 +123,20 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
     private void playDogBreed(int val) {
         if (!btnSubmitState) {
             if (spinner.getSelectedItem().equals("SELECT A BREED..")) {
-                if(Config.TIMER_GAME_MODE == 0) {
+
+                if (val == 1){
+                    if(Config.TIMER_GAME_MODE == 1) {
+                        Toast.makeText(getApplicationContext(),
+                                "Time Out", Toast.LENGTH_SHORT).show();
+                        timerConstraintLayout.setVisibility(View.GONE);
+                        spinner.setEnabled(false);
+                        spinner.setClickable(false);
+                        btnSubmit.setText("Next");
+                        btnSubmitState = true;
+                    }
+                }else {
                     Toast.makeText(getApplicationContext(),
                             "Please select a breed", Toast.LENGTH_SHORT).show();
-                }
-
-                if(Config.TIMER_GAME_MODE == 1){
-                    Toast.makeText(getApplicationContext(),
-                            "Time Out", Toast.LENGTH_SHORT).show();
-                    timerConstraintLayout.setVisibility(View.GONE);
-                    spinner.setEnabled(false);
-                    spinner.setClickable(false);
-                    btnSubmit.setText("Next");
-                    btnSubmitState = true;
                 }
                 return;
             }

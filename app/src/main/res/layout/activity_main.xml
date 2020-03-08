@@ -12,10 +12,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.3333333333333333333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/btnBreed"
@@ -28,7 +28,7 @@
             app:layout_constraintHeight_percent=".4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".6"/>
+            app:layout_constraintWidth_percent=".6" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -38,11 +38,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#2196F3"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.3333333333333333333"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" >
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/btnDog"
@@ -55,20 +55,20 @@
             app:layout_constraintHeight_percent=".4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".6"/>
+            app:layout_constraintWidth_percent=".6" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#673AB7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/btnSearchBreeds"
@@ -81,7 +81,28 @@
             app:layout_constraintHeight_percent=".4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".6"/>
+            app:layout_constraintWidth_percent=".6" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Switch
+            android:id="@+id/switchTimerMode"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="Timer Mode"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintWidth_percent=".3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

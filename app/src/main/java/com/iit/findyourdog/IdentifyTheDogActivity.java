@@ -16,7 +16,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.iit.findyourdog.alerts.SuccessfulAlert;
 import com.iit.findyourdog.alerts.WarningAlert;
-import com.iit.findyourdog.alerts.WarningAlertDetail;
 import com.iit.findyourdog.config.Config;
 import com.iit.findyourdog.util.AppUtils;
 import com.iit.findyourdog.util.DogBreeds;
@@ -101,19 +100,20 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         if (!btnSubmitState) {
             //validate user is select a image or not
             if (selectedImageIndex == -1) {
-                if (Config.TIMER_GAME_MODE == 0) {
+                if (val == 1) {
+                    if (Config.TIMER_GAME_MODE == 1) {
+                        Toast.makeText(getApplicationContext(),
+                                "Time Out", Toast.LENGTH_SHORT).show();
+                        imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.BLUE);
+                        timerConstraintLayout.setVisibility(View.GONE);
+                        btnSubmit.setText("Next");
+                        btnSubmitState = true;
+                    }
+                } else {
                     Toast.makeText(getApplicationContext(),
                             "Please Select an Image!", Toast.LENGTH_SHORT).show();
                 }
-
-                if (Config.TIMER_GAME_MODE == 1) {
-                    Toast.makeText(getApplicationContext(),
-                            "Time Out", Toast.LENGTH_SHORT).show();
-                    imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.BLUE);
-                    timerConstraintLayout.setVisibility(View.GONE);
-                    btnSubmit.setText("Next");
-                    btnSubmitState = true;
-                }
+                return;
             }
 
             if (Config.TIMER_GAME_MODE == 1) {
