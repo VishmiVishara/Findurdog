@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.iit.findyourdog.alerts.SuccessfulAlertDetail;
+import com.iit.findyourdog.alerts.TimesUpAlert;
 import com.iit.findyourdog.alerts.WarningAlertDetail;
 import com.iit.findyourdog.config.Config;
 import com.iit.findyourdog.util.AppUtils;
@@ -126,8 +127,12 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
                 if (val == 1){
                     if(Config.TIMER_GAME_MODE == 1) {
-                        Toast.makeText(getApplicationContext(),
-                                "Time Out", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(),
+//                                "Time Out", Toast.LENGTH_SHORT).show();
+
+                        TimesUpAlert timesUpAlert =
+                                new TimesUpAlert(IdentifyTheBreedActivity.this);
+                        timesUpAlert.show();
                         timerConstraintLayout.setVisibility(View.GONE);
                         spinner.setEnabled(false);
                         spinner.setClickable(false);

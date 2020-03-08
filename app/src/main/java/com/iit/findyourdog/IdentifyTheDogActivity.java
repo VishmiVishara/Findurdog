@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.iit.findyourdog.alerts.SuccessfulAlert;
+import com.iit.findyourdog.alerts.TimesUpAlert;
 import com.iit.findyourdog.alerts.WarningAlert;
 import com.iit.findyourdog.config.Config;
 import com.iit.findyourdog.util.AppUtils;
@@ -102,8 +103,11 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
             if (selectedImageIndex == -1) {
                 if (val == 1) {
                     if (Config.TIMER_GAME_MODE == 1) {
-                        Toast.makeText(getApplicationContext(),
-                                "Time Out", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(),
+//                                "Time Out", Toast.LENGTH_SHORT).show();
+                        TimesUpAlert timesUpAlert =
+                                new TimesUpAlert(IdentifyTheDogActivity.this);
+                        timesUpAlert.show();
                         imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.BLUE);
                         timerConstraintLayout.setVisibility(View.GONE);
                         btnSubmit.setText("Next");

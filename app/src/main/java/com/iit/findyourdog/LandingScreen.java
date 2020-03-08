@@ -1,4 +1,4 @@
-package com.iit.findyoirdog;
+package com.iit.findyourdog;
 
 import androidx.appcompat.app.AppCompatActivity;
 
