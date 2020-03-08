@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHeight_percent="0.30"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -38,8 +38,10 @@
                 android:layout_marginBottom="16dp"
                 android:background="@null"
                 android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
 
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -48,12 +50,12 @@
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.5"
+                app:layout_constraintHeight_percent="0.4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/gog_breed"/>
+                app:srcCompat="@drawable/gog_breed" />
 
             <TextView
                 android:id="@+id/textView"
@@ -67,9 +69,10 @@
                 android:gravity="center"
                 android:text="Identify the Breed"
                 android:textColor="#000000"
-                android:textStyle="bold"
+                android:textSize="16sp"
+                app:fontFamily="@font/font_2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent=".25"
+                app:layout_constraintHeight_percent=".35"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -96,6 +99,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@null"
                 android:gravity="center"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -105,12 +109,12 @@
                 android:id="@+id/imageView3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.5"
+                app:layout_constraintHeight_percent="0.4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/dog_search"/>
+                app:srcCompat="@drawable/dog_search" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -124,9 +128,10 @@
                 android:gravity="center"
                 android:text="Search Dog Breeds"
                 android:textColor="#000000"
-                android:textStyle="bold"
+                android:textSize="15sp"
+                app:fontFamily="@font/font_2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent=".25"
+                app:layout_constraintHeight_percent=".35"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
@@ -153,20 +158,22 @@
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:elevation="200dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.5"
+                app:layout_constraintHeight_percent="0.4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/dog_identify"/>
+                app:srcCompat="@drawable/dog_identify" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -180,10 +187,10 @@
                 android:gravity="center"
                 android:text="Identify the Dog"
                 android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                android:textSize="16sp"
+                app:fontFamily="@font/font_2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent=".25"
+                app:layout_constraintHeight_percent=".35"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -205,12 +212,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="Timer Mode"
+            android:textColor="#F8000000"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".3" />
+            app:layout_constraintWidth_percent=".35" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -221,7 +230,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout8"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0" >
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/dog_main_new"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

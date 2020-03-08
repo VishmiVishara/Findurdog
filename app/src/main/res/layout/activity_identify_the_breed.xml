@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IdentifyTheBreedActivity">
+    tools:context=".IdentifyTheBreedActivity"
+    android:background="#ffffff">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutImageView"
@@ -102,12 +103,13 @@
                 android:id="@+id/btnSubmitDog"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="#CDDC39"
                 android:gravity="center"
                 android:text="Submit"
+                android:background="#9dcbdb"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent=".5"
+                app:fontFamily="@font/font_2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent=".6"

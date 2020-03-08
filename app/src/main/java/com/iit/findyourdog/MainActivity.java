@@ -1,6 +1,7 @@
 package com.iit.findyourdog;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         btnDog          =   findViewById(R.id.btnDog);
         btnSearchBreeds =   findViewById(R.id.btnSearchBreeds);
         timerModeSwitch =   findViewById(R.id.switchTimerMode);
+
+        timerModeSwitch.setTypeface(ResourcesCompat.getFont(this, R.font.font_2));
+
     }
 
     private void initializeListeners() {

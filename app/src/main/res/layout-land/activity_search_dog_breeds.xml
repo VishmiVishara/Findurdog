@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.iit.findyourdog.SearchDogBreedsActivity">
+    tools:context="com.iit.findyourdog.SearchDogBreedsActivity"
+    android:background="#ffffff">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintSearch"
@@ -40,7 +41,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:background="#9dcbdb"
             android:text="Submit"
+            android:textSize="18sp"
+            app:fontFamily="@font/font_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/search"
@@ -92,7 +96,11 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:layout_marginBottom="32dp"
+            android:background="#9dcbdb"
             android:text="Stop"
+            app:fontFamily="@font/font_2"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
