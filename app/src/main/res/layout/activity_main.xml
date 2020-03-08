@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
 
@@ -11,7 +12,6 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#0CEDF1F5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.25"
@@ -24,6 +24,8 @@
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="#F6F5FF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,11 +35,12 @@
                 android:id="@+id/btnBreed"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginBottom="16dp"
                 android:background="@null"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
 
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView" />
 
@@ -45,12 +48,12 @@
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHeight_percent="0.5"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:srcCompat="@drawable/gog_breed"/>
 
             <TextView
                 android:id="@+id/textView"
@@ -63,8 +66,10 @@
                 android:layout_marginRight="16dp"
                 android:gravity="center"
                 android:text="Identify the Breed"
+                android:textColor="#000000"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent=".2"
+                app:layout_constraintHeight_percent=".25"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -76,6 +81,8 @@
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="#F6F5FF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -86,6 +93,7 @@
                 android:id="@+id/btnSearchBreeds"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginBottom="16dp"
                 android:background="@null"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -97,12 +105,12 @@
                 android:id="@+id/imageView3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHeight_percent="0.5"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:srcCompat="@drawable/dog_search"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -115,8 +123,10 @@
                 android:layout_marginRight="16dp"
                 android:gravity="center"
                 android:text="Search Dog Breeds"
+                android:textColor="#000000"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent=".2"
+                app:layout_constraintHeight_percent=".25"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
@@ -125,6 +135,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            android:background="#F6F5FF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
             app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
@@ -136,6 +148,7 @@
                 android:id="@+id/btnDog"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginBottom="16dp"
                 android:background="@null"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -147,12 +160,13 @@
                 android:id="@+id/imageView2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="16dp"
+                android:elevation="200dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHeight_percent="0.5"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:srcCompat="@drawable/dog_identify"/>
 
             <TextView
                 android:id="@+id/textView2"
@@ -165,8 +179,11 @@
                 android:layout_marginRight="16dp"
                 android:gravity="center"
                 android:text="Identify the Dog"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent=".2"
+                app:layout_constraintHeight_percent=".25"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -175,12 +192,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout8"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHeight_percent=".1">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Switch
             android:id="@+id/switchTimerMode"
@@ -192,9 +210,18 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".3"
-             />
+            app:layout_constraintWidth_percent=".3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/do_image_con"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
