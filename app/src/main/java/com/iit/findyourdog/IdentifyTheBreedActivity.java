@@ -14,8 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.iit.findyourdog.alerts.SuccessfulAlert;
-import com.iit.findyourdog.alerts.WarningAlert;
+import com.iit.findyourdog.alerts.SuccessfulAlertDetail;
+import com.iit.findyourdog.alerts.WarningAlertDetail;
 import com.iit.findyourdog.config.Config;
 import com.iit.findyourdog.util.AppUtils;
 import com.iit.findyourdog.util.CustomAdapter;
@@ -157,29 +157,20 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
             if (selectedItem.toLowerCase().equals(randomBreedName)) {
                 System.out.println("Correct!!");
-                SuccessfulAlert successfulAlert =
-                        new SuccessfulAlert(IdentifyTheBreedActivity.this);
+                String answer = "Great! Answer \" " + selectedItem + " \" is CORRECT!!";
+                SuccessfulAlertDetail successfulAlert =
+                        new SuccessfulAlertDetail(IdentifyTheBreedActivity.this, answer);
                 successfulAlert.show();
                 timerConstraintLayout.setVisibility(View.GONE);
-//                labelStatus.setText("Great! Answer \" " + selectedItem + " \" is CORRECT!!");
-//                labelStatus.setTextColor(Color.GREEN);
-
-//                labelAnswer.setText("CORRECT BREED: "
-//                        + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName));
-//                labelAnswer.setTextColor(Color.BLUE);
 
             } else {
                 System.out.println("Wrong!!");
-                WarningAlert warningAlert =
-                        new WarningAlert(IdentifyTheBreedActivity.this);
+                String answer = "CORRECT BREED: " + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName);
+                WarningAlertDetail warningAlert =
+                        new WarningAlertDetail(IdentifyTheBreedActivity.this, answer);
                 warningAlert.show();
                 timerConstraintLayout.setVisibility(View.GONE);
-//                labelStatus.setText("Sorry! Answer \"" + selectedItem + " \" is WRONG!");
-//                labelStatus.setTextColor(Color.RED);
-//
-//                labelAnswer.setText("CORRECT BREED: "
-//                        + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName));
-//                labelAnswer.setTextColor(Color.BLUE);
+
             }
 
             spinner.setEnabled(false);
@@ -199,7 +190,9 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        timer.cancel();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 
 }

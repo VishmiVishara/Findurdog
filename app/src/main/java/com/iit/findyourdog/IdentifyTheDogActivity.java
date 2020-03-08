@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.iit.findyourdog.alerts.SuccessfulAlert;
 import com.iit.findyourdog.alerts.WarningAlert;
+import com.iit.findyourdog.alerts.WarningAlertDetail;
 import com.iit.findyourdog.config.Config;
 import com.iit.findyourdog.util.AppUtils;
 import com.iit.findyourdog.util.DogBreeds;
@@ -237,6 +238,8 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        timer.cancel();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 }
