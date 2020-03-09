@@ -1,6 +1,7 @@
 package com.iit.findyourdog.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 
 public class AppUtils {
@@ -8,6 +9,41 @@ public class AppUtils {
 
         int resourceId = mContext.getResources().getIdentifier(name, "drawable", mContext.getPackageName());
         return mContext.getResources().getDrawable(resourceId);
+    }
+
+    public static void scoreIdentifyBreed(Context context, int score) {
+        if (getScoreTheDogInBreed(context) > score) {
+            return;
+        }
+
+        SharedPreferences preferences = context.getSharedPreferences("Score", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("identifyBreed", score);
+        editor.commit();
+    }
+
+    public static int getScoreTheDogInBreed(Context context) {
+
+        SharedPreferences preferences = context.getSharedPreferences("Score", Context.MODE_PRIVATE);
+        return preferences.getInt("identifyBreed", 0);
+    }
+
+
+    public static void storeIdentifyDog(Context context, int score) {
+        if (getScoreTheDog(context) > score) {
+            return;
+        }
+
+        SharedPreferences preferences = context.getSharedPreferences("Score", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("identifyDog", score);
+        editor.commit();
+    }
+
+    public static int getScoreTheDog(Context context) {
+
+        SharedPreferences preferences = context.getSharedPreferences("Score", Context.MODE_PRIVATE);
+        return  preferences.getInt("identifyDog", 0);
     }
 
 }

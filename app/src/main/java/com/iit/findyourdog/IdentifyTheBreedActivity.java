@@ -1,11 +1,7 @@
 package com.iit.findyourdog;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -21,7 +17,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.iit.findyourdog.alerts.GameSummaryAlert;
 import com.iit.findyourdog.alerts.SuccessfulAlertDetail;
 import com.iit.findyourdog.alerts.TimesUpAlert;
 import com.iit.findyourdog.alerts.WarningAlertDetail;
@@ -235,21 +230,12 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        String correct = "" + Config.CORRECT_COUNT_DOG_BREED;
-        String wrong = "" + Config.WRONG_COUNT_DOG_BREED;
-        String noAnswer = "YOUR SCORE: " + Config.SCORE_IDENTIFY_DOG_BREED;
-        if (Config.HIGHEST_SCORE_IDENTIFY_DOG_BREED < Config.SCORE_IDENTIFY_DOG_BREED){
-            Config.HIGHEST_SCORE_IDENTIFY_DOG_BREED = Config.SCORE_IDENTIFY_DOG_BREED;
-        }
-        String highScore = "HIGHEST SCORE: " + Config.HIGHEST_SCORE_IDENTIFY_DOG_BREED;
-
-        System.out.println(Config.HIGHEST_SCORE_IDENTIFY_DOG_BREED);
-
-        GameSummaryAlert summaryAlert =
-                new GameSummaryAlert(IdentifyTheBreedActivity.this,correct, wrong,noAnswer,highScore );
-        summaryAlert.show();
+        Config.IS_BREED_ACTIVITY = true;
+        AppUtils.scoreIdentifyBreed(IdentifyTheBreedActivity.this, Config.SCORE_IDENTIFY_DOG_BREED);
+        Intent intent = new Intent(getApplicationContext(), GameSummaryActivity.class);
+        startActivity(intent);
+        finish();
     }
-
 }
 
 
