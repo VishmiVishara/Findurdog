@@ -27,7 +27,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:cardCornerRadius="30dp"/>
+            app:cardCornerRadius="3dp"
+            app:cardUseCompatPadding="true"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"

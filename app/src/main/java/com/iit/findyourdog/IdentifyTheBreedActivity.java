@@ -1,7 +1,11 @@
 package com.iit.findyourdog;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
+import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -17,6 +21,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.iit.findyourdog.alerts.GameSummaryAlert;
 import com.iit.findyourdog.alerts.SuccessfulAlertDetail;
 import com.iit.findyourdog.alerts.TimesUpAlert;
 import com.iit.findyourdog.alerts.WarningAlertDetail;
@@ -34,14 +39,15 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView txtCount;
     private ConstraintLayout timerConstraintLayout;
+    private TextView txtScore;
 
     //Instance Variables
     private CustomAdapter dataAdapter = null;
-    private boolean btnSubmitState    = false;
-    private String randomBreedName    = null;
-    private String imageName          = null;
-    private CountDownTimer timer      = null;
-    private int progress              = 10;
+    private boolean btnSubmitState = false;
+    private String randomBreedName = null;
+    private String imageName = null;
+    private CountDownTimer timer = null;
+    private int remainingTime = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +56,6 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
         // bind UI components
         initializeUIComponents();
-
     }
 
     @Override
@@ -72,9 +77,9 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         setImageToView();
         createDropDownList();
 
-        if(Config.TIMER_GAME_MODE == 0) {
+        if (Config.TIMER_GAME_MODE == 0) {
             timerConstraintLayout.setVisibility((View.GONE));
-        }else {
+        } else {
             timerConstraintLayout.setVisibility((View.VISIBLE));
             setupTimer();
         }
@@ -114,17 +119,19 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         timer = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long l) {
+                remainingTime--;
+                System.out.println(remainingTime);
+                progressBar.setProgress(remainingTime * 100 / (10000 / 1000));
+                txtCount.setText(remainingTime + "");
 
-                progress--;
-                System.out.println(progress);
-                progressBar.setProgress(progress * 100 / (10000 / 1000));
-                txtCount.setText(progress + "");
+                if (remainingTime <= 10) {
+                    playSound();
+                }
             }
 
             @Override
             public void onFinish() {
-
-                progress++;
+                remainingTime++;
                 progressBar.setProgress(0);
                 playDogBreed(1);
             }
@@ -137,11 +144,11 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         if (!btnSubmitState) {
             if (spinner.getSelectedItem().equals("SELECT A BREED..")) {
 
-                if (val == 1){
-                    if(Config.TIMER_GAME_MODE == 1) {
+                if (val == 1) {
+                    if (Config.TIMER_GAME_MODE == 1) {
                         timeOut();
                     }
-                }else {
+                } else {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Please select a breed", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -166,19 +173,25 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
 
             if (selectedItem.toLowerCase().equals(randomBreedName)) {
-
                 String answer = "Great! Answer \" " + selectedItem + " \" is CORRECT!!";
                 SuccessfulAlertDetail successfulAlert =
                         new SuccessfulAlertDetail(IdentifyTheBreedActivity.this, answer);
                 successfulAlert.show();
+                Config.CORRECT_COUNT_DOG_BREED += 1;
+
+                Config.SCORE_IDENTIFY_DOG_BREED += 10;
+
+                System.out.println(Config.SCORE_IDENTIFY_DOG_BREED);
                 timerConstraintLayout.setVisibility(View.GONE);
 
             } else {
-
                 String answer = "CORRECT BREED: " + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName);
                 WarningAlertDetail warningAlert =
                         new WarningAlertDetail(IdentifyTheBreedActivity.this, answer);
                 warningAlert.show();
+
+                Config.WRONG_COUNT_DOG_BREED += 1;
+
                 timerConstraintLayout.setVisibility(View.GONE);
 
             }
@@ -197,20 +210,44 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
     }
 
-    private void timeOut(){
-
+    private void timeOut() {
         //Vibrate phone when time's up
-        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        Vibrator v = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         v.vibrate(400);
 
         TimesUpAlert timesUpAlert =
                 new TimesUpAlert(IdentifyTheBreedActivity.this);
         timesUpAlert.show();
+
+        Config.WRONG_COUNT_DOG_BREED += 1;
+
         timerConstraintLayout.setVisibility(View.GONE);
         spinner.setEnabled(false);
         spinner.setClickable(false);
         btnSubmit.setText("Next");
         btnSubmitState = true;
+    }
+
+    private void playSound() {
+        MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.clock_sound);
+        mPlayer.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        String correct = "" + Config.CORRECT_COUNT_DOG_BREED;
+        String wrong = "" + Config.WRONG_COUNT_DOG_BREED;
+        String noAnswer = "YOUR SCORE: " + Config.SCORE_IDENTIFY_DOG_BREED;
+        if (Config.HIGHEST_SCORE_IDENTIFY_DOG_BREED < Config.SCORE_IDENTIFY_DOG_BREED){
+            Config.HIGHEST_SCORE_IDENTIFY_DOG_BREED = Config.SCORE_IDENTIFY_DOG_BREED;
+        }
+        String highScore = "HIGHEST SCORE: " + Config.HIGHEST_SCORE_IDENTIFY_DOG_BREED;
+
+        System.out.println(Config.HIGHEST_SCORE_IDENTIFY_DOG_BREED);
+
+        GameSummaryAlert summaryAlert =
+                new GameSummaryAlert(IdentifyTheBreedActivity.this,correct, wrong,noAnswer,highScore );
+        summaryAlert.show();
     }
 
 }

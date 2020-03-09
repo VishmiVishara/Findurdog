@@ -30,7 +30,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
 
     @Override
     public int getCount() {
-        // don't display last item. It is used as hint.
+        // not to display last item since it's the hint
         int count = super.getCount();
         return count > 0 ? count - 1 : count;
     }

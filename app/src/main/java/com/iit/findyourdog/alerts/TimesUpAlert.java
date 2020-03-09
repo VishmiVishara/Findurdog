@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.iit.findyourdog.R;
 
@@ -13,7 +12,6 @@ public class TimesUpAlert extends AlertDialog {
 
     private Activity current;
     private Button btnSuccess;
-    private TextView txtAnswer;
 
     public TimesUpAlert(Activity current) {
         super(current);
@@ -26,9 +24,6 @@ public class TimesUpAlert extends AlertDialog {
         setContentView(R.layout.times_up_message);
 
         btnSuccess = findViewById(R.id.btnSuccess);
-        txtAnswer = findViewById(R.id.txtAnswerTimesUp);
-
-        txtAnswer.setText("Click Next!");
 
         btnSuccess.setOnClickListener(new View.OnClickListener() {
             @Override

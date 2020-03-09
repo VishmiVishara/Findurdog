@@ -1,10 +1,13 @@
 package com.iit.findyourdog;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.iit.findyourdog.alerts.GameSummaryAlert;
 import com.iit.findyourdog.alerts.SuccessfulAlert;
 import com.iit.findyourdog.alerts.TimesUpAlert;
 import com.iit.findyourdog.alerts.WarningAlert;
@@ -24,6 +28,7 @@ import com.iit.findyourdog.config.Config;
 import com.iit.findyourdog.util.AppUtils;
 import com.iit.findyourdog.util.DogBreeds;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -51,7 +56,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     private boolean btnSubmitState                   = false;
     private int selectedImageIndex                   = -1;
     private CountDownTimer timer                     = null;
-    private int progress                             = 10;
+    private int remainingTime = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +169,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
                     if (Config.TIMER_GAME_MODE == 1) {
                         Toast toast = Toast.makeText(getApplicationContext(),
                                 "Answer marked in Blue!", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
                         timeOut();
                         toast.show();
                     }
@@ -187,6 +192,9 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
                 SuccessfulAlert identifyBreedCorrectMessage = new SuccessfulAlert(IdentifyTheDogActivity.this);
                 identifyBreedCorrectMessage.show();
 
+                Config.CORRECT_COUNT_DOG += 1;
+                Config.SCORE_IDENTIFY_DOG += 10;
+
                 imageBorderedList.get(selectedImageIndex).setBackgroundColor(Color.GREEN);
             } else if (selectedImageIndex != randomPickedHeadingIndex && selectedImageIndex != -1) {
                 WarningAlert identifyBreedWrongMessage = new WarningAlert(IdentifyTheDogActivity.this);
@@ -194,6 +202,8 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
 
                 imageBorderedList.get(selectedImageIndex).setBackgroundColor(Color.RED);
                 imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.GREEN);
+
+                Config.WRONG_COUNT_DOG += 1;
             }
             btnSubmit.setText("Next");
             btnSubmitState = true;
@@ -238,6 +248,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         TimesUpAlert timesUpAlert =
                 new TimesUpAlert(IdentifyTheDogActivity.this);
         timesUpAlert.show();
+        Config.WRONG_COUNT_DOG += 1;
         imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.BLUE);
         timerConstraintLayout.setVisibility(View.GONE);
         btnSubmit.setText("Next");
@@ -249,16 +260,19 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         timer = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long l) {
+                remainingTime--;
+                System.out.println(remainingTime);
+                progressBar.setProgress(remainingTime * 100 / (10000 / 1000));
+                txtCount.setText(remainingTime + "");
 
-                progress--;
-                System.out.println(progress);
-                progressBar.setProgress(progress * 100 / (10000 / 1000));
-                txtCount.setText(progress + "");
+                if (remainingTime <= 10) {
+                    playSound();
+                }
             }
 
             @Override
             public void onFinish() {
-                progress++;
+                remainingTime++;
                 progressBar.setProgress(0);
                 selectedImageIndex = -1;
                 playTimerGameMode(1);
@@ -268,5 +282,30 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         timer.start();
     }
 
+//    https://stackoverflow.com/questions/4861859/implement-sounds-in-an-android-application
+    private void playSound() {
+        MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.clock_sound);
+        mPlayer.start();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        String correct = "" + Config.CORRECT_COUNT_DOG;
+        String wrong = "" + Config.WRONG_COUNT_DOG;
+        String noAnswer = "YOUR SCORE: " + Config.SCORE_IDENTIFY_DOG;
+
+        if (Config.HIGHEST_SCORE_IDENTIFY_DOG < Config.SCORE_IDENTIFY_DOG ||
+                Config.HIGHEST_SCORE_IDENTIFY_DOG == 0){
+            Config.HIGHEST_SCORE_IDENTIFY_DOG = Config.SCORE_IDENTIFY_DOG;
+        }
+
+        String highScore = "HIGHEST SCORE: " + Config.HIGHEST_SCORE_IDENTIFY_DOG;
+        System.out.println(Config.HIGHEST_SCORE_IDENTIFY_DOG_BREED);
+
+        GameSummaryAlert summaryAlert =
+                new GameSummaryAlert(IdentifyTheDogActivity.this,correct, wrong,noAnswer, highScore);
+        summaryAlert.show();
+    }
 
 }
