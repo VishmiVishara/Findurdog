@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -141,8 +142,10 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
                         timeOut();
                     }
                 }else {
-                    Toast.makeText(getApplicationContext(),
-                            "Please select a breed", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Please select a breed", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
                 return;
             }

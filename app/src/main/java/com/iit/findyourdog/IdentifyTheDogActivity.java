@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.Vibrator;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -160,11 +162,17 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
             if (selectedImageIndex == -1) {
                 if (val == 1) {
                     if (Config.TIMER_GAME_MODE == 1) {
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Answer marked in Blue!", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
                         timeOut();
+                        toast.show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Please Select an Image!", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Please select a Dog!", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
                 return;
             }
@@ -227,7 +235,6 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         //Vibrate phone when time's up
         Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
         v.vibrate(400);
-
         TimesUpAlert timesUpAlert =
                 new TimesUpAlert(IdentifyTheDogActivity.this);
         timesUpAlert.show();
