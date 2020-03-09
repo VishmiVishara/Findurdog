@@ -16,12 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchDogBreedsActivity" />
-        <activity android:name=".IdentifyTheDogActivity" />
-        <activity android:name=".IdentifyTheBreedActivity" />
+        <activity android:name=".SearchDogBreedsActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"/>
+        <activity android:name=".IdentifyTheDogActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"/>
+        <activity android:name=".IdentifyTheBreedActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"/>
         <activity android:name=".MainActivity">
 
+
+
         </activity>
+
 
 
 

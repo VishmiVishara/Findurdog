@@ -1,6 +1,7 @@
 package com.iit.findyourdog;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -208,7 +209,6 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         btnSubmit.setText("Next");
         btnSubmitState = true;
     }
-
 
 }
 

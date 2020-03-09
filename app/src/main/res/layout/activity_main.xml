@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#F8F7F6"
     tools:context=".MainActivity">
 
 
@@ -25,7 +25,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="16dp"
-            android:background="#F6F5FF"
+            android:background="#C1D81B60"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +38,6 @@
                 android:layout_marginBottom="16dp"
                 android:background="@null"
                 android:gravity="center"
-
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +84,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
-            android:background="#F6F5FF"
+            android:background="#C4299DDF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -141,7 +140,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
-            android:background="#F6F5FF"
+            android:background="#B48E24AA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
             app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
@@ -205,7 +204,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#BAF4FAED">
 
         <Switch
             android:id="@+id/switchTimerMode"
@@ -226,7 +226,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintWidth_percent=".35"
-            tools:checked="false" />
+            tools:checked="false"
+            android:theme="@style/swithStyle"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
