@@ -14,7 +14,7 @@ public class Config {
     public static int CORRECT_COUNT_DOG_BREED = 0;
     public static int WRONG_COUNT_DOG_BREED = 0;
 
-    public static int HIGHEST_SCORE_IDENTIFY_DOG = 100;
+    public static int HIGHEST_SCORE_IDENTIFY_DOG = 0;
     public static int SCORE_IDENTIFY_DOG = 0;
     public static int CORRECT_COUNT_DOG = 0;
     public static int WRONG_COUNT_DOG = 0;

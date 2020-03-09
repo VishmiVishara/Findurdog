@@ -1,11 +1,9 @@
 package com.iit.findyourdog;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -28,7 +26,6 @@ import com.iit.findyourdog.config.Config;
 import com.iit.findyourdog.util.AppUtils;
 import com.iit.findyourdog.util.DogBreeds;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -49,13 +46,12 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     private ConstraintLayout timerConstraintLayout;
 
     //Instance Variables
-    private List<String> randomGeneratedBreedList    = new ArrayList<>();
-    private List<ImageView> imageViewList            = new ArrayList<>();
+    private List<String> randomGeneratedBreedList = new ArrayList<>();
+    private List<ImageView> imageViewList = new ArrayList<>();
     private List<ConstraintLayout> imageBorderedList = new ArrayList<>();
-    private int randomPickedHeadingIndex             = 0;
-    private boolean btnSubmitState                   = false;
-    private int selectedImageIndex                   = -1;
-    private CountDownTimer timer                     = null;
+    private int randomPickedHeadingIndex = 0;
+    private int selectedImageIndex = -1;
+    private CountDownTimer timer = null;
     private int remainingTime = 10;
 
     @Override
@@ -79,7 +75,6 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imageViewOne:
-
                 imageOneBorder = findViewById(R.id.conImageOne);
                 imageTwoBorder = findViewById(R.id.conImageTwo);
                 imageThreeBorder = findViewById(R.id.conImageThree);
@@ -88,6 +83,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
                 imageTwoBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageOneBorder.setBackgroundColor(Color.YELLOW);
                 selectedImageIndex = (int) imageOne.getTag();
+                playTimerGameMode(0);
 
                 break;
             case R.id.imageViewTwo:
@@ -96,7 +92,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
                 imageThreeBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageTwoBorder.setBackgroundColor(Color.YELLOW);
                 selectedImageIndex = (int) imageTwo.getTag();
-
+                playTimerGameMode(0);
                 break;
             case R.id.imageViewThree:
 
@@ -104,12 +100,14 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
                 imageTwoBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageThreeBorder.setBackgroundColor(Color.YELLOW);
                 selectedImageIndex = (int) imageThree.getTag();
-
+                playTimerGameMode(0);
                 break;
 
             case R.id.btnSubmitDog:
 
-                playTimerGameMode(0);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
 
                 break;
 
@@ -117,7 +115,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         }
     }
 
-    private void initializeVIew (){
+    private void initializeVIew() {
         initializeTheUIComponents();
 
         if (Config.TIMER_GAME_MODE == 0) {
@@ -159,60 +157,49 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         setImagesToView();
         setHeading();
 
+        btnSubmit.setEnabled(false);
+
     }
 
     private void playTimerGameMode(int val) {
-        if (!btnSubmitState) {
-            //validate user is select a image or not
-            if (selectedImageIndex == -1) {
-                if (val == 1) {
-                    if (Config.TIMER_GAME_MODE == 1) {
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                "Answer marked in Blue!", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
-                        timeOut();
-                        toast.show();
-                    }
-                } else {
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "Please select a Dog!", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-                return;
-            }
 
-            if (Config.TIMER_GAME_MODE == 1) {
-                progressBar.setVisibility(View.INVISIBLE);
-                timer.cancel();
-                txtCount.setVisibility(View.INVISIBLE);
-            }
+        imageOne.setClickable(false);
+        imageTwo.setClickable(false);
+        imageThree.setClickable(false);
+        btnSubmit.setEnabled(true);
 
-            if (selectedImageIndex == randomPickedHeadingIndex) {
-                SuccessfulAlert identifyBreedCorrectMessage = new SuccessfulAlert(IdentifyTheDogActivity.this);
-                identifyBreedCorrectMessage.show();
+        if (Config.TIMER_GAME_MODE == 1 && val == 1) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Answer marked in Blue!", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
+            timeOut();
+            toast.show();
+            return;
+        }
 
-                Config.CORRECT_COUNT_DOG += 1;
-                Config.SCORE_IDENTIFY_DOG += 10;
 
-                imageBorderedList.get(selectedImageIndex).setBackgroundColor(Color.GREEN);
-            } else if (selectedImageIndex != randomPickedHeadingIndex && selectedImageIndex != -1) {
-                WarningAlert identifyBreedWrongMessage = new WarningAlert(IdentifyTheDogActivity.this);
-                identifyBreedWrongMessage.show();
+        if (Config.TIMER_GAME_MODE == 1) {
+            progressBar.setVisibility(View.INVISIBLE);
+            timer.cancel();
+            txtCount.setVisibility(View.INVISIBLE);
+        }
 
-                imageBorderedList.get(selectedImageIndex).setBackgroundColor(Color.RED);
-                imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.GREEN);
+        if (selectedImageIndex == randomPickedHeadingIndex) {
+            SuccessfulAlert identifyBreedCorrectMessage = new SuccessfulAlert(IdentifyTheDogActivity.this);
+            identifyBreedCorrectMessage.show();
 
-                Config.WRONG_COUNT_DOG += 1;
-            }
-            btnSubmit.setText("Next");
-            btnSubmitState = true;
+            Config.CORRECT_COUNT_DOG += 1;
+            Config.SCORE_IDENTIFY_DOG += 10;
 
-        } else if (btnSubmitState) {
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
-            btnSubmitState = false;
+            imageBorderedList.get(selectedImageIndex).setBackgroundColor(Color.GREEN);
+        } else if (selectedImageIndex != randomPickedHeadingIndex && selectedImageIndex != -1) {
+            WarningAlert identifyBreedWrongMessage = new WarningAlert(IdentifyTheDogActivity.this);
+            identifyBreedWrongMessage.show();
+
+            imageBorderedList.get(selectedImageIndex).setBackgroundColor(Color.RED);
+            imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.GREEN);
+
+            Config.WRONG_COUNT_DOG += 1;
         }
     }
 
@@ -240,10 +227,10 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         txtBreedName.setText(DogBreeds.getInstance().getDogBreedMap().get(breedName));
     }
 
-    private void timeOut(){
+    private void timeOut() {
 
         //Vibrate phone when time's up
-        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        Vibrator v = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         v.vibrate(400);
         TimesUpAlert timesUpAlert =
                 new TimesUpAlert(IdentifyTheDogActivity.this);
@@ -252,7 +239,6 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.BLUE);
         timerConstraintLayout.setVisibility(View.GONE);
         btnSubmit.setText("Next");
-        btnSubmitState = true;
     }
 
     private void setupTimer() {
@@ -282,7 +268,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         timer.start();
     }
 
-//    https://stackoverflow.com/questions/4861859/implement-sounds-in-an-android-application
+    //    https://stackoverflow.com/questions/4861859/implement-sounds-in-an-android-application
     private void playSound() {
         MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.clock_sound);
         mPlayer.start();
@@ -296,7 +282,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         String noAnswer = "YOUR SCORE: " + Config.SCORE_IDENTIFY_DOG;
 
         if (Config.HIGHEST_SCORE_IDENTIFY_DOG < Config.SCORE_IDENTIFY_DOG ||
-                Config.HIGHEST_SCORE_IDENTIFY_DOG == 0){
+                Config.HIGHEST_SCORE_IDENTIFY_DOG == 0) {
             Config.HIGHEST_SCORE_IDENTIFY_DOG = Config.SCORE_IDENTIFY_DOG;
         }
 
@@ -304,7 +290,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         System.out.println(Config.HIGHEST_SCORE_IDENTIFY_DOG_BREED);
 
         GameSummaryAlert summaryAlert =
-                new GameSummaryAlert(IdentifyTheDogActivity.this,correct, wrong,noAnswer, highScore);
+                new GameSummaryAlert(IdentifyTheDogActivity.this, correct, wrong, noAnswer, highScore);
         summaryAlert.show();
     }
 
