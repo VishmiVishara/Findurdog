@@ -211,15 +211,22 @@
             android:id="@+id/switchTimerMode"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:checked="false"
             android:text="Timer Mode"
-            android:textColor="#F8000000"
+            android:textColor="#000000"
+            android:textColorHighlight="#00BCD4"
+            android:textColorHint="#2196F3"
+            android:textColorLink="#00BCD4"
             android:textSize="14sp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".35" />
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintWidth_percent=".35"
+            tools:checked="false" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

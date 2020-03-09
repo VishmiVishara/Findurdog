@@ -21,16 +21,18 @@ import java.util.TimerTask;
 
 public class SearchDogBreedsActivity extends AppCompatActivity {
 
+    //UI Components
     private AutoCompleteTextView search;
     private ViewPager slider;
     private Button btnSearchBreed;
     private Button btnStop;
 
-    private List<String> dogImagesList = new ArrayList<>();
-    private Timer swipeTimer = new Timer();
-    private final Handler handler = new Handler();
+    //Instance Variables
+    private List<String> dogImagesList        = new ArrayList<>();
+    private Timer swipeTimer                  = new Timer();
+    private final Handler handler             = new Handler();
     private List<String> suggestionBreedNames = new ArrayList<>();
-    private SliderAdapter sliderAdapter = null;
+    private SliderAdapter sliderAdapter       = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +106,6 @@ public class SearchDogBreedsActivity extends AppCompatActivity {
 
         setSliderTimer();
     }
-
 
     private void reset() {
         stopTimer();

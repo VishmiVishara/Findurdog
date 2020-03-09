@@ -35,9 +35,8 @@ public class SliderAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View imageLayout = inflater.inflate(R.layout.image_slider, container, false);
         assert imageLayout != null;
-        ImageView imageView = (ImageView) imageLayout
-                .findViewById(R.id.imgSlider);
-        System.out.println(imageList.get(position));
+        ImageView imageView =  imageLayout.findViewById(R.id.imgSlider);
+        // setting image to image view
         imageView.setImageDrawable(AppUtils.getDrawable(context, imageList.get(position)));
         container.addView(imageLayout, 0);
         return imageLayout;

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ import java.util.Random;
 
 public class IdentifyTheDogActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //UI Components
     private ImageView imageOne;
     private ImageView imageTwo;
     private ImageView imageThree;
@@ -39,20 +41,76 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     private TextView txtCount;
     private ConstraintLayout timerConstraintLayout;
 
-    private List<String> randomGeneratedBreedList = new ArrayList<>();
-    private List<ImageView> imageViewList = new ArrayList<>();
+    //Instance Variables
+    private List<String> randomGeneratedBreedList    = new ArrayList<>();
+    private List<ImageView> imageViewList            = new ArrayList<>();
     private List<ConstraintLayout> imageBorderedList = new ArrayList<>();
-    private int randomPickedHeadingIndex = 0;
-    private boolean btnSubmitState = false;
-    private int selectedImageIndex = -1;
-    private CountDownTimer timer;
-    private int progress = 10;
+    private int randomPickedHeadingIndex             = 0;
+    private boolean btnSubmitState                   = false;
+    private int selectedImageIndex                   = -1;
+    private CountDownTimer timer                     = null;
+    private int progress                             = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identify_the_dog);
 
+        initializeVIew();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imageViewOne:
+
+                imageOneBorder = findViewById(R.id.conImageOne);
+                imageTwoBorder = findViewById(R.id.conImageTwo);
+                imageThreeBorder = findViewById(R.id.conImageThree);
+
+                imageThreeBorder.setBackgroundColor(Color.TRANSPARENT);
+                imageTwoBorder.setBackgroundColor(Color.TRANSPARENT);
+                imageOneBorder.setBackgroundColor(Color.YELLOW);
+                selectedImageIndex = (int) imageOne.getTag();
+
+                break;
+            case R.id.imageViewTwo:
+
+                imageOneBorder.setBackgroundColor(Color.TRANSPARENT);
+                imageThreeBorder.setBackgroundColor(Color.TRANSPARENT);
+                imageTwoBorder.setBackgroundColor(Color.YELLOW);
+                selectedImageIndex = (int) imageTwo.getTag();
+
+                break;
+            case R.id.imageViewThree:
+
+                imageOneBorder.setBackgroundColor(Color.TRANSPARENT);
+                imageTwoBorder.setBackgroundColor(Color.TRANSPARENT);
+                imageThreeBorder.setBackgroundColor(Color.YELLOW);
+                selectedImageIndex = (int) imageThree.getTag();
+
+                break;
+
+            case R.id.btnSubmitDog:
+
+                playTimerGameMode(0);
+
+                break;
+
+
+        }
+    }
+
+    private void initializeVIew (){
         initializeTheUIComponents();
 
         if (Config.TIMER_GAME_MODE == 0) {
@@ -61,7 +119,6 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
             timerConstraintLayout.setVisibility((View.VISIBLE));
             setupTimer();
         }
-
     }
 
     private void initializeTheUIComponents() {
@@ -103,15 +160,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
             if (selectedImageIndex == -1) {
                 if (val == 1) {
                     if (Config.TIMER_GAME_MODE == 1) {
-//                        Toast.makeText(getApplicationContext(),
-//                                "Time Out", Toast.LENGTH_SHORT).show();
-                        TimesUpAlert timesUpAlert =
-                                new TimesUpAlert(IdentifyTheDogActivity.this);
-                        timesUpAlert.show();
-                        imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.BLUE);
-                        timerConstraintLayout.setVisibility(View.GONE);
-                        btnSubmit.setText("Next");
-                        btnSubmitState = true;
+                        timeOut();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(),
@@ -173,46 +222,19 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         txtBreedName.setText(DogBreeds.getInstance().getDogBreedMap().get(breedName));
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.imageViewOne:
+    private void timeOut(){
 
-                imageOneBorder = findViewById(R.id.conImageOne);
-                imageTwoBorder = findViewById(R.id.conImageTwo);
-                imageThreeBorder = findViewById(R.id.conImageThree);
+        //Vibrate phone when time's up
+        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        v.vibrate(400);
 
-                imageThreeBorder.setBackgroundColor(Color.TRANSPARENT);
-                imageTwoBorder.setBackgroundColor(Color.TRANSPARENT);
-                imageOneBorder.setBackgroundColor(Color.YELLOW);
-                selectedImageIndex = (int) imageOne.getTag();
-
-                break;
-            case R.id.imageViewTwo:
-
-                imageOneBorder.setBackgroundColor(Color.TRANSPARENT);
-                imageThreeBorder.setBackgroundColor(Color.TRANSPARENT);
-                imageTwoBorder.setBackgroundColor(Color.YELLOW);
-                selectedImageIndex = (int) imageTwo.getTag();
-
-                break;
-            case R.id.imageViewThree:
-
-                imageOneBorder.setBackgroundColor(Color.TRANSPARENT);
-                imageTwoBorder.setBackgroundColor(Color.TRANSPARENT);
-                imageThreeBorder.setBackgroundColor(Color.YELLOW);
-                selectedImageIndex = (int) imageThree.getTag();
-
-                break;
-
-            case R.id.btnSubmitDog:
-
-                playTimerGameMode(0);
-
-                break;
-
-
-        }
+        TimesUpAlert timesUpAlert =
+                new TimesUpAlert(IdentifyTheDogActivity.this);
+        timesUpAlert.show();
+        imageBorderedList.get(randomPickedHeadingIndex).setBackgroundColor(Color.BLUE);
+        timerConstraintLayout.setVisibility(View.GONE);
+        btnSubmit.setText("Next");
+        btnSubmitState = true;
     }
 
     private void setupTimer() {
@@ -239,11 +261,5 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         timer.start();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (timer != null) {
-            timer.cancel();
-        }
-    }
+
 }

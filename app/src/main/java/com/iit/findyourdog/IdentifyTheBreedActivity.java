@@ -3,6 +3,7 @@ package com.iit.findyourdog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import com.iit.findyourdog.util.DogBreeds;
 
 public class IdentifyTheBreedActivity extends AppCompatActivity {
 
+    //UI Components
     private ImageView imageView;
     private Button btnSubmit;
     private Spinner spinner;
@@ -31,12 +33,13 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
     private TextView txtCount;
     private ConstraintLayout timerConstraintLayout;
 
+    //Instance Variables
     private CustomAdapter dataAdapter = null;
-    private boolean btnSubmitState = false;
-    private String randomBreedName = null;
-    private String imageName = null;
-    private CountDownTimer timer;
-    private int progress = 10;
+    private boolean btnSubmitState    = false;
+    private String randomBreedName    = null;
+    private String imageName          = null;
+    private CountDownTimer timer      = null;
+    private int progress              = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,14 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         // bind UI components
         initializeUIComponents();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 
     private void initializeUIComponents() {
@@ -120,24 +131,13 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         timer.start();
     }
 
-
     private void playDogBreed(int val) {
         if (!btnSubmitState) {
             if (spinner.getSelectedItem().equals("SELECT A BREED..")) {
 
                 if (val == 1){
                     if(Config.TIMER_GAME_MODE == 1) {
-//                        Toast.makeText(getApplicationContext(),
-//                                "Time Out", Toast.LENGTH_SHORT).show();
-
-                        TimesUpAlert timesUpAlert =
-                                new TimesUpAlert(IdentifyTheBreedActivity.this);
-                        timesUpAlert.show();
-                        timerConstraintLayout.setVisibility(View.GONE);
-                        spinner.setEnabled(false);
-                        spinner.setClickable(false);
-                        btnSubmit.setText("Next");
-                        btnSubmitState = true;
+                        timeOut();
                     }
                 }else {
                     Toast.makeText(getApplicationContext(),
@@ -162,7 +162,7 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
 
             if (selectedItem.toLowerCase().equals(randomBreedName)) {
-                System.out.println("Correct!!");
+
                 String answer = "Great! Answer \" " + selectedItem + " \" is CORRECT!!";
                 SuccessfulAlertDetail successfulAlert =
                         new SuccessfulAlertDetail(IdentifyTheBreedActivity.this, answer);
@@ -170,7 +170,7 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
                 timerConstraintLayout.setVisibility(View.GONE);
 
             } else {
-                System.out.println("Wrong!!");
+
                 String answer = "CORRECT BREED: " + DogBreeds.getInstance().getDogBreedMap().get(randomBreedName);
                 WarningAlertDetail warningAlert =
                         new WarningAlertDetail(IdentifyTheBreedActivity.this, answer);
@@ -193,13 +193,22 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (timer != null) {
-            timer.cancel();
-        }
+    private void timeOut(){
+
+        //Vibrate phone when time's up
+        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        v.vibrate(400);
+
+        TimesUpAlert timesUpAlert =
+                new TimesUpAlert(IdentifyTheBreedActivity.this);
+        timesUpAlert.show();
+        timerConstraintLayout.setVisibility(View.GONE);
+        spinner.setEnabled(false);
+        spinner.setClickable(false);
+        btnSubmit.setText("Next");
+        btnSubmitState = true;
     }
+
 
 }
 

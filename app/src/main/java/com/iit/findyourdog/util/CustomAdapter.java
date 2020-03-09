@@ -16,8 +16,8 @@ import com.iit.findyourdog.R;
 
 import java.util.List;
 
+//REF: https://stackoverflow.com/questions/867518/how-to-make-an-android-spinner-with-initial-text-select-one
 public class CustomAdapter extends ArrayAdapter<String> {
-
 
     private Typeface font ;
 
