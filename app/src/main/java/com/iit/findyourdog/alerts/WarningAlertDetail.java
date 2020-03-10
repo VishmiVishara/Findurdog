@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.iit.findyourdog.R;
 
+/**
+ * WarningAlertDetail: Show user selection was wrong
+ */
 public class WarningAlertDetail extends AlertDialog {
     private Activity current;
     private Button btnWarning;
@@ -30,7 +33,9 @@ public class WarningAlertDetail extends AlertDialog {
         btnWarning = findViewById(R.id.btnWrong);
         txtAnswer = findViewById(R.id.txtAnswerWrong);
 
-        txtAnswer.setText(message);
+        txtAnswer.setText(message); //set detailed message to the textview
+
+        // alert dismiss when user clicks ok
         btnWarning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -28,6 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * IdentifyTheDogActivity: Game Two- Identify The Dog
+ */
+
 public class IdentifyTheDogActivity extends AppCompatActivity implements View.OnClickListener {
 
     //UI Components
@@ -43,7 +47,6 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     private TextView txtCount;
     private ConstraintLayout timerConstraintLayout;
 
-    //Instance Variables
     private List<String> randomGeneratedBreedList = new ArrayList<>();
     private List<ImageView> imageViewList = new ArrayList<>();
     private List<ConstraintLayout> imageBorderedList = new ArrayList<>();
@@ -69,14 +72,12 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         }
     }
 
+    //user click
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.imageViewOne:
-                imageOneBorder = findViewById(R.id.conImageOne);
-                imageTwoBorder = findViewById(R.id.conImageTwo);
-                imageThreeBorder = findViewById(R.id.conImageThree);
 
+            case R.id.imageViewOne:
                 imageThreeBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageTwoBorder.setBackgroundColor(Color.TRANSPARENT);
                 imageOneBorder.setBackgroundColor(Color.YELLOW);
@@ -125,16 +126,22 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
     }
 
     private void initializeTheUIComponents() {
+        //images
         imageOne = findViewById(R.id.imageViewOne);
         imageTwo = findViewById(R.id.imageViewTwo);
         imageThree = findViewById(R.id.imageViewThree);
-        btnSubmit = findViewById(R.id.btnSubmitDog);
-        txtBreedName = findViewById(R.id.txtBreedName);
+
+        //boarders
         imageOneBorder = findViewById(R.id.conImageOne);
         imageTwoBorder = findViewById(R.id.conImageTwo);
         imageThreeBorder = findViewById(R.id.conImageThree);
         progressBar = findViewById(R.id.progressCircularDog);
+
         txtCount = findViewById(R.id.txtCountDog);
+        btnSubmit = findViewById(R.id.btnSubmitDog);
+        txtBreedName = findViewById(R.id.txtBreedName);
+
+        //timer layout --> to hide after finishing
         timerConstraintLayout = findViewById(R.id.constraintLayoutTimerDog);
 
 
@@ -166,7 +173,9 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         imageThree.setClickable(false);
         btnSubmit.setEnabled(true);
 
+        // when time out answer marked in Blue
         if (Config.TIMER_GAME_MODE == 1 && val == 1) {
+            // toast to inform user
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Answer marked in Blue!", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
@@ -176,12 +185,14 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         }
 
 
+        // check whether timer mode one
         if (Config.TIMER_GAME_MODE == 1) {
             progressBar.setVisibility(View.INVISIBLE);
             timer.cancel();
             txtCount.setVisibility(View.INVISIBLE);
         }
 
+        // correct selection
         if (selectedImageIndex == randomPickedHeadingIndex) {
             SuccessfulAlert identifyBreedCorrectMessage = new SuccessfulAlert(IdentifyTheDogActivity.this);
             identifyBreedCorrectMessage.show();
@@ -190,7 +201,11 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
             Config.SCORE_IDENTIFY_DOG += 10;
 
             imageBorderedList.get(selectedImageIndex).setBackgroundColor(Color.GREEN);
-        } else if (selectedImageIndex != randomPickedHeadingIndex && selectedImageIndex != -1) {
+
+        }
+        // wrong selection and checking selectedImageIndex
+        // in timer mode if user didnt select any it's passing -1
+        else if (selectedImageIndex != randomPickedHeadingIndex && selectedImageIndex != -1) {
             WarningAlert identifyBreedWrongMessage = new WarningAlert(IdentifyTheDogActivity.this);
             identifyBreedWrongMessage.show();
 
@@ -201,6 +216,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         }
     }
 
+    //setting image to view
     private void setImageToView(ImageView imageView, int position) {
         String randomBreedName = DogBreeds.getInstance().getRandomBreed();
         if (!randomGeneratedBreedList.contains(randomBreedName)) {
@@ -211,6 +227,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         imageView.setTag(position);
     }
 
+    //set images
     private void setImagesToView() {
         for (int index = 0; index < 3; index++) {
             imageViewList.get(index).setOnClickListener(IdentifyTheDogActivity.this);
@@ -218,6 +235,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         }
     }
 
+    //set header
     private void setHeading() {
         Random random = new Random();
         randomPickedHeadingIndex = random.nextInt(3);
@@ -225,6 +243,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         txtBreedName.setText(DogBreeds.getInstance().getDogBreedMap().get(breedName));
     }
 
+    //timeout
     private void timeOut() {
 
         //Vibrate phone when time's up
@@ -239,6 +258,7 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         btnSubmit.setText("Next");
     }
 
+    //timer setup
     private void setupTimer() {
         progressBar.setProgress(0);
         timer = new CountDownTimer(10000, 1000) {
@@ -266,13 +286,19 @@ public class IdentifyTheDogActivity extends AppCompatActivity implements View.On
         timer.start();
     }
 
-    //    https://stackoverflow.com/questions/4861859/implement-sounds-in-an-android-application
+    /**
+     * application, I., 2020. Implement Sounds In An Android Application. [online]
+     * Stack Overflow. Available at:
+     * <https://stackoverflow.com/questions/4861859/implement-sounds-in-an-android-application>
+     * [Accessed 9 March 2020].
+     */
     private void playSound() {
         MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.clock_sound);
         mPlayer.start();
     }
 
 
+    // calling game summary
     @Override
     public void onBackPressed() {
         Config.IS_BREED_ACTIVITY = false;

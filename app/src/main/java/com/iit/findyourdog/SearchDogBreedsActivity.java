@@ -63,9 +63,11 @@ public class SearchDogBreedsActivity extends AppCompatActivity {
         search.setEnabled(true);
     }
 
+    // slider set
     private void setSlider() {
-        reset();
+        resetView();
 
+        // Without typing when user click submit
         String searchedBreedName = search.getText().toString();
         if ( searchedBreedName.isEmpty()) {
             slider.setVisibility(View.INVISIBLE);
@@ -78,6 +80,7 @@ public class SearchDogBreedsActivity extends AppCompatActivity {
             return;
         }
 
+        // search for a invalid breed name
         if (!DogBreeds.getInstance().getShowBreeds().contains(searchedBreedName)) {
 
             slider.setVisibility(View.INVISIBLE);
@@ -107,11 +110,13 @@ public class SearchDogBreedsActivity extends AppCompatActivity {
         setSliderTimer();
     }
 
-    private void reset() {
+    //rest view
+    private void resetView() {
         stopTimer();
         dogImagesList.clear();
     }
 
+    //initializing listeners
     private void initializeListeners() {
         btnSearchBreed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +142,7 @@ public class SearchDogBreedsActivity extends AppCompatActivity {
 
     }
 
+    //stop timer when user click stop
     private void stopTimer() {
         if (swipeTimer != null) {
             swipeTimer.cancel();
@@ -144,6 +150,7 @@ public class SearchDogBreedsActivity extends AppCompatActivity {
         }
     }
 
+    //slider timer
     private void setSliderTimer() {
 
         final Runnable runnable = new Runnable() {
@@ -165,6 +172,7 @@ public class SearchDogBreedsActivity extends AppCompatActivity {
                 handler.post(runnable);
             }
         }, 0, 5000);
+        //changing every 5 seconds
 
     }
 }

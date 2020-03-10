@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Dog Breeds Class - Singleton
+ */
 public class DogBreeds {
-
+    // creating singleton object
     private static DogBreeds dogBreeds = new DogBreeds();
     private List<String> dogBreedsList = new ArrayList<String>() {{
         add("goldenretriever");
@@ -29,6 +32,7 @@ public class DogBreeds {
         add("shihtzu");
     }};
 
+    // to show user
     private List<String> showBreeds = new ArrayList<String>() {{
         add("Golden Retriever");
         add("Beagle");
@@ -49,6 +53,7 @@ public class DogBreeds {
 
     }};
 
+    // to show user get identifed with file name
     private Map<String, String> dogBreedMap = new HashMap<String,String>(){
         {
             put("goldenretriever", "Golden Retriever");
@@ -69,6 +74,7 @@ public class DogBreeds {
 
         }
     };
+
 
     public Map<String, String> getDogBreedMap() {
         return dogBreedMap;
@@ -92,6 +98,7 @@ public class DogBreeds {
         return dogBreeds;
     }
 
+    //get random Breed Index
     private void getRandomBreedIndex() {
         Random random = new Random();
         while (breedIndexList.size() < Config.MAX_DOG_BREEDS_COUNT) {
@@ -104,6 +111,7 @@ public class DogBreeds {
         }
     }
 
+    // ger random breed
     public String getRandomBreed() {
         if (indexBreed == breedIndexList.size()) {
             breedIndexList.clear();
@@ -115,6 +123,7 @@ public class DogBreeds {
 
     }
 
+    //get Random image Index
     private void getRandomImageIndex() {
         Random random = new Random();
         while (imageIndexList.size() < Config.MAX_DOG_IMAGE_COUNT) {
@@ -128,6 +137,7 @@ public class DogBreeds {
         }
     }
 
+    // Get random Image
     public String getRandomImage(String breedName) {
         if (indexImage == imageIndexList.size()) {
             imageIndexList.clear();

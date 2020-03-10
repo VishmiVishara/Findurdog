@@ -8,8 +8,12 @@ import android.widget.Button;
 
 import com.iit.findyourdog.R;
 
-public class SuccessfulAlert extends AlertDialog {
 
+/**
+ * SuccessfulAlert: Show user selection was successful
+ */
+
+public class SuccessfulAlert extends AlertDialog {
     private Activity current;
     private Button btnSuccess;
 
@@ -23,11 +27,11 @@ public class SuccessfulAlert extends AlertDialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.successfull_alert);
 
+        // alert dismiss when user clicks ok
         btnSuccess = findViewById(R.id.btnSuccess);
         btnSuccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 SuccessfulAlert.this.dismiss();
             }
         });

@@ -1,5 +1,9 @@
 package com.iit.findyourdog.config;
 
+/**
+ * Config: This consists of all the Configurations
+ */
+
 public class Config {
     public static final int MIN_DOG_BREEDS_COUNT = 0;
     public static final int MAX_DOG_BREEDS_COUNT = 14;

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+//Landing Screen
 public class LandingScreen extends AppCompatActivity {
 
     @Override

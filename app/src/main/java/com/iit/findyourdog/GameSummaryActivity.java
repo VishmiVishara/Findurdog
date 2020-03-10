@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.iit.findyourdog.config.Config;
 import com.iit.findyourdog.util.AppUtils;
 
+/**
+ * GameSummaryActivity: Game Summary display
+ */
 public class GameSummaryActivity extends AppCompatActivity {
     private Activity current;
     private Button btnSuccess;
@@ -53,7 +56,7 @@ public class GameSummaryActivity extends AppCompatActivity {
             correct = Config.CORRECT_COUNT_DOG_BREED + "";
             wrong = Config.WRONG_COUNT_DOG_BREED + "";
             score = Config.SCORE_IDENTIFY_DOG_BREED + "";
-            highestScore = AppUtils.getScoreTheDogInBreed(this) + "";
+            highestScore = AppUtils.getScoreTheDogInBreed(this) + ""; // getting highest score
 
             txtCorrect.setText(correct);
             txtWrong.setText(wrong);
@@ -74,7 +77,7 @@ public class GameSummaryActivity extends AppCompatActivity {
             correct = Config.CORRECT_COUNT_DOG + "";
             wrong = Config.WRONG_COUNT_DOG + "";
             score = Config.SCORE_IDENTIFY_DOG + "";
-            highestScore = AppUtils.getScoreTheDog(this) + "";
+            highestScore = AppUtils.getScoreTheDog(this) + ""; // getting highest score
 
             txtCorrect.setText(correct);
             txtWrong.setText(wrong);

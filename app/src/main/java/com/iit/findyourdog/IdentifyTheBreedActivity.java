@@ -25,6 +25,9 @@ import com.iit.findyourdog.util.AppUtils;
 import com.iit.findyourdog.util.CustomAdapter;
 import com.iit.findyourdog.util.DogBreeds;
 
+/**
+ * IdentifyTheBreedActivity: Game One - Identify the Dog Breed
+ */
 public class IdentifyTheBreedActivity extends AppCompatActivity {
 
     //UI Components
@@ -34,9 +37,7 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView txtCount;
     private ConstraintLayout timerConstraintLayout;
-    private TextView txtScore;
 
-    //Instance Variables
     private CustomAdapter dataAdapter = null;
     private boolean btnSubmitState = false;
     private String randomBreedName = null;
@@ -94,6 +95,7 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
     }
 
+    // creating dropdown
     protected void createDropDownList() {
         dataAdapter = new CustomAdapter(this,
                 android.R.layout.simple_spinner_item, DogBreeds.getInstance().getShowBreeds());
@@ -103,12 +105,15 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
     }
 
+
+    // getting images from drawable and setting it to the view
     private void setImageToView() {
         randomBreedName = DogBreeds.getInstance().getRandomBreed();
         imageName = DogBreeds.getInstance().getRandomImage(randomBreedName);
         imageView.setImageDrawable(AppUtils.getDrawable(this, imageName));
     }
 
+    // Countdown Timer
     private void setupTimer() {
         progressBar.setProgress(0);
         timer = new CountDownTimer(10000, 1000) {
@@ -135,6 +140,7 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         timer.start();
     }
 
+    // game play
     private void playDogBreed(int val) {
         if (!btnSubmitState) {
             if (spinner.getSelectedItem().equals("SELECT A BREED..")) {
@@ -199,12 +205,13 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         } else if (btnSubmitState) {
             Intent intent = getIntent();
             finish();
-            startActivity(intent);
+            startActivity(intent); //starting new activity
             btnSubmitState = false;
         }
 
     }
 
+    // timer time out
     private void timeOut() {
         //Vibrate phone when time's up
         Vibrator v = (Vibrator) getSystemService(VIBRATOR_SERVICE);
@@ -223,11 +230,13 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
         btnSubmitState = true;
     }
 
+    // playing timer sound
     private void playSound() {
         MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.clock_sound);
         mPlayer.start();
     }
 
+    //showing Game summary when user click on back button
     @Override
     public void onBackPressed() {
         Config.IS_BREED_ACTIVITY = true;

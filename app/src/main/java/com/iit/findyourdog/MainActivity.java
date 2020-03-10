@@ -12,8 +12,6 @@ import android.widget.Switch;
 
 import com.iit.findyourdog.config.Config;
 
-import java.util.Set;
-
 public class MainActivity extends AppCompatActivity {
 
     private Button btnBreed;
@@ -76,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // tmer swith
         timerModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {

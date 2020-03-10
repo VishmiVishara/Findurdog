@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import com.iit.findyourdog.R;
 
+/**
+ * SuccessfulAlertDetail: Show selection was successful in detail
+ */
+
 public class SuccessfulAlertDetail extends AlertDialog {
 
     private Activity current;
@@ -30,9 +34,9 @@ public class SuccessfulAlertDetail extends AlertDialog {
 
         btnSuccess = findViewById(R.id.btnSuccess);
         txtMessage = findViewById(R.id.txtAnswer);
+        txtMessage.setText(message); //set message to text field
 
-        txtMessage.setText(message);
-
+        // alert dismiss when user clicks ok
         btnSuccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

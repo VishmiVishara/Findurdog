@@ -12,8 +12,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.iit.findyourdog.R;
 
-public class TimesUpAlert extends AlertDialog {
+/**
+ * TimesUpAlert: Show user time is over
+ */
 
+public class TimesUpAlert extends AlertDialog {
     private Activity current;
     private Button btnSuccess;
     private ConstraintLayout constraintLayoutView;
@@ -31,9 +34,11 @@ public class TimesUpAlert extends AlertDialog {
         btnSuccess = findViewById(R.id.btnSuccess);
         constraintLayoutView = findViewById(R.id.constraintLayout4);
 
+        // added animation for the alert
         final Animation animShake = AnimationUtils.loadAnimation(getContext(), R.anim.vibrate);
         constraintLayoutView.startAnimation(animShake);
 
+        // alert dismiss when user clicks ok
         btnSuccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

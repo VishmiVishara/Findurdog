@@ -5,6 +5,13 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
+/**
+ * One&rdquo;?, H. and Kuijpers, P., 2020.
+ * How To Make An Android Spinner With Initial Text "Select One"?. [online] Stack Overflow.
+ * Available at: <https://stackoverflow.com/questions/867518/how-to-make-an-android-spinner-with-initial-text-select-one>
+ * Accessed 9 March 2020].
+ */
+
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -16,7 +23,9 @@ import com.iit.findyourdog.R;
 
 import java.util.List;
 
-//REF: https://stackoverflow.com/questions/867518/how-to-make-an-android-spinner-with-initial-text-select-one
+/**
+ * Custom Adapter gor Dropdown
+ */
 public class CustomAdapter extends ArrayAdapter<String> {
 
     private Typeface font ;
@@ -38,7 +47,6 @@ public class CustomAdapter extends ArrayAdapter<String> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
         TextView textView = (TextView)super.getView(position, convertView, parent);
         textView.setTypeface(font);
         textView.setTextColor(Color.parseColor("#B53471"));
