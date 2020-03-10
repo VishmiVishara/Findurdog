@@ -43,6 +43,7 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:text=""
+            android:textColor="#4E342E"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -246,13 +247,15 @@
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:text="Next"
+            android:textSize="22dp"
             app:fontFamily="@font/font_2"
-            android:background="#9dcbdb"
+            android:background="#9980FA"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent=".4"
+            app:layout_constraintHeight_percent=".35"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayoutBreadName"
-            app:layout_constraintWidth_percent=".4" />
+            app:layout_constraintWidth_percent=".6" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayoutBreadName"
@@ -269,9 +272,8 @@
                 android:layout_height="0dp"
                 android:gravity="center"
                 android:text=""
-                android:textColor="#9dcbdb"
+                android:textColor="#5758BB"
                 android:textSize="24sp"
-                android:textStyle="bold"
                 app:fontFamily="@font/font_2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

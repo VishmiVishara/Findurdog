@@ -25,27 +25,29 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="16dp"
-            android:background="#f07da8"
+            android:background="#FDA7DF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".3">
+            app:layout_constraintWidth_percent=".3"
+            android:elevation="2dp"
+            >
 
             <Button
                 android:id="@+id/btnBreed"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="16dp"
-                android:background="@null"
+                android:background="@drawable/shadow"
                 android:gravity="center"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:elevation="200dp"
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -57,6 +59,7 @@
                 app:srcCompat="@drawable/gog_breed" />
 
             <TextView
+                android:elevation="200dp"
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -89,14 +92,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            app:layout_constraintWidth_percent=".3">
+            app:layout_constraintWidth_percent=".3"
+            android:elevation="2dp">
 
             <Button
+                android:elevation="2dp"
+                android:background="@drawable/shaow_b"
                 android:id="@+id/btnSearchBreeds"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="16dp"
-                android:background="@null"
                 android:gravity="center"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -105,6 +109,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:elevation="200dp"
                 android:id="@+id/imageView3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -116,6 +121,7 @@
                 app:srcCompat="@drawable/dog_search" />
 
             <TextView
+                android:elevation="200dp"
                 android:id="@+id/textView3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -140,20 +146,21 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
-            android:background="#9b63f8"
+            android:background="#9980FA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
             app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintWidth_percent=".3">
+            app:layout_constraintWidth_percent=".3"
+            android:elevation="2dp">
 
             <Button
                 android:id="@+id/btnDog"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="16dp"
-                android:background="@null"
+                android:background="@drawable/shaow_p"
+                android:elevation="2dp"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -175,6 +182,7 @@
                 app:srcCompat="@drawable/dog_identify" />
 
             <TextView
+                android:elevation="200dp"
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -201,13 +209,14 @@
         android:id="@+id/constraintLayout8"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:background="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/do_image_con"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6">
 
         <Switch
             android:id="@+id/switchTimerMode"
@@ -215,12 +224,12 @@
             android:layout_height="0dp"
             android:checked="false"
             android:text="Timer Mode"
-            android:textColor="#030303"
+            android:textColor="#B53471"
             android:textColorHighlight="#00BCD4"
             android:textColorHint="#2196F3"
             android:textColorLink="#00BCD4"
-            android:textSize="14sp"
-            android:textStyle="italic"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:theme="@style/swithStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -228,7 +237,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintWidth_percent=".35"
+            app:layout_constraintWidth_percent=".45"
             tools:checked="false" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -241,21 +250,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout8"
-        app:layout_constraintVertical_bias="0.0" >
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/a3"
-            android:scaleType="centerCrop"/>
+            app:srcCompat="@drawable/dog_main" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

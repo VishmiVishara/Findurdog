@@ -20,7 +20,6 @@ public class GameSummaryActivity extends AppCompatActivity {
     private TextView txtScore;
     private TextView txtHighestScore;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

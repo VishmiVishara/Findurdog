@@ -41,7 +41,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
 
         TextView textView = (TextView)super.getView(position, convertView, parent);
         textView.setTypeface(font);
-        textView.setTextColor(Color.BLACK);
+        textView.setTextColor(Color.parseColor("#B53471"));
         textView.setTextSize(20);
         return textView;
 
