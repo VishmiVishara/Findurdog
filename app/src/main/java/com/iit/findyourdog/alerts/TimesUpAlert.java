@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.iit.findyourdog.R;
 
@@ -12,6 +16,7 @@ public class TimesUpAlert extends AlertDialog {
 
     private Activity current;
     private Button btnSuccess;
+    private ConstraintLayout constraintLayoutView;
 
     public TimesUpAlert(Activity current) {
         super(current);
@@ -24,6 +29,10 @@ public class TimesUpAlert extends AlertDialog {
         setContentView(R.layout.times_up_message);
 
         btnSuccess = findViewById(R.id.btnSuccess);
+        constraintLayoutView = findViewById(R.id.constraintLayout4);
+
+        final Animation animShake = AnimationUtils.loadAnimation(getContext(), R.anim.vibrate);
+        constraintLayoutView.startAnimation(animShake);
 
         btnSuccess.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +41,7 @@ public class TimesUpAlert extends AlertDialog {
                 TimesUpAlert.this.dismiss();
             }
         });
+
 
     }
 

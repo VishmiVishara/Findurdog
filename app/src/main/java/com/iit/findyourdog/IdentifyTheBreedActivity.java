@@ -168,7 +168,7 @@ public class IdentifyTheBreedActivity extends AppCompatActivity {
 
 
             if (selectedItem.toLowerCase().equals(randomBreedName)) {
-                String answer = "Great! Answer \" " + selectedItem + " \" is CORRECT!!";
+                String answer = "ANSWER \" " + selectedItem + " \" IS CORRECT!!";
                 SuccessfulAlertDetail successfulAlert =
                         new SuccessfulAlertDetail(IdentifyTheBreedActivity.this, answer);
                 successfulAlert.show();
