@@ -41,6 +41,8 @@ public class CustomAdapter extends ArrayAdapter<String> {
     public int getCount() {
         // not to display last item since it's the hint
         int count = super.getCount();
+        System.out.println(count);
+        System.out.println(count-1);
         return count > 0 ? count - 1 : count;
     }
 

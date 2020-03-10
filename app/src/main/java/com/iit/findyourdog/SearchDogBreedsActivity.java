@@ -99,7 +99,7 @@ public class SearchDogBreedsActivity extends AppCompatActivity {
 
         searchedBreedName = searchedBreedName.replaceAll("\\s+", "").toLowerCase();
         System.out.println(searchedBreedName);
-        for (int imageIndex = 0; imageIndex < 10; imageIndex++) {
+        for (int imageIndex = 0; imageIndex < 20; imageIndex++) {
             String imageName = DogBreeds.getInstance().getRandomImage(searchedBreedName);
             dogImagesList.add(imageName);
         }

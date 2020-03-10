@@ -15,63 +15,61 @@ public class DogBreeds {
     // creating singleton object
     private static DogBreeds dogBreeds = new DogBreeds();
     private List<String> dogBreedsList = new ArrayList<String>() {{
-        add("goldenretriever");
-        add("beagle");
-        add("redbone");
-        add("cairn");
-        add("cardigan");
-        add("chow");
         add("pomeranian");
-        add("greatpyrenees");
-        add("entlebucher");
-        add("appenzeller");
-        add("collie");
+        add("bullmastiff");
+        add("pug");
+        add("boxer");
+        add("germanshepherd");
+        add("rottweiler");
+        add("cockerspaniel");
         add("labradorretriever");
-        add("lhasa");
-        add("kuvasz");
+        add("goldenretriever");
+        add("bostonbull");
+        add("dandiedinmont");
+        add("australianterrier");
+        add("beaglel");
+        add("blenheimspaniel");
         add("shihtzu");
     }};
 
     // to show user
     private List<String> showBreeds = new ArrayList<String>() {{
         add("Golden Retriever");
-        add("Beagle");
-        add("Redbone");
-        add("Cairn");
-        add("Cardigan");
-        add("Chow");
         add("Pomeranian");
-        add("Great Pyrenees");
-        add("EntleBucher");
-        add("Appenzeller");
-        add("Collie");
+        add("Beagle");
         add("Labrador Retriever");
-        add("Lhasa");
-        add("Kuvasz");
         add("Shih Tzu");
+        add("Blenheim Spaniel");
+        add("Australian Terrier");
+        add("Dandie Dinmont");
+        add("Boston Bull");
+        add("Cocker Spaniel");
+        add("Rottweiler");
+        add("German Shepherd");
+        add("Boxer");
+        add("Pug");
+        add("Bull Mastiff");
         add("SELECT A BREED..");
-
     }};
 
     // to show user get identifed with file name
     private Map<String, String> dogBreedMap = new HashMap<String,String>(){
         {
             put("goldenretriever", "Golden Retriever");
-            put("beagle", "Beagle");
-            put("redbone", "Redbone");
-            put("cairn", "Cairn");
-            put("cardigan", "Cardigan");
-            put("chow", "Chow");
             put("pomeranian", "Pomeranian");
-            put("greatpyrenees", "Great Pyrenees");
-            put("entlebucher", "EntleBucher");
-            put("appenzeller", "Appenzeller");
-            put("collie", "Collie");
-            put("labradorretriever", "Labrador Retriever");
-            put("lhasa", "Lhasa");
-            put("kuvasz", "Kuvasz");
             put("shihtzu", "Shih Tzu");
-
+            put("beaglel", "Beagle");
+            put("labradorretriever", "Labrador Retriever");
+            put("blenheimspaniel", "Blenheim Spaniel");
+            put("australianterrier", "Australian Terrier");
+            put("dandiedinmont", "Dandie Dinmont");
+            put("bostonbull", "Boston Bull");
+            put("cockerspaniel", "Cocker Spaniel");
+            put("rottweiler", "Rottweiler");
+            put("germanshepherd", "German Shepherd");
+            put("boxer", "Boxer");
+            put("pug", "Pug");
+            put("bullmastiff", "Bull Mastiff");
         }
     };
 
