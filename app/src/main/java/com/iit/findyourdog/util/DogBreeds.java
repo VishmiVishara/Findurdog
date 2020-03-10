@@ -36,7 +36,7 @@ public class DogBreeds {
     private List<String> showBreeds = new ArrayList<String>() {{
         add("Golden Retriever");
         add("Pomeranian");
-        add("Beagle");
+        add("Beaglel");
         add("Labrador Retriever");
         add("Shih Tzu");
         add("Blenheim Spaniel");
@@ -58,7 +58,7 @@ public class DogBreeds {
             put("goldenretriever", "Golden Retriever");
             put("pomeranian", "Pomeranian");
             put("shihtzu", "Shih Tzu");
-            put("beaglel", "Beagle");
+            put("beaglel", "Beaglel");
             put("labradorretriever", "Labrador Retriever");
             put("blenheimspaniel", "Blenheim Spaniel");
             put("australianterrier", "Australian Terrier");
