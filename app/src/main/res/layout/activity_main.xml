@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F7F6"
+    android:background="@android:color/white"
     tools:context=".MainActivity">
 
 
@@ -25,7 +25,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="16dp"
-            android:background="#C1D81B60"
+            android:background="#f07da8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -84,7 +84,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
-            android:background="#C4299DDF"
+            android:background="#7e9ffc"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -140,7 +140,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
-            android:background="#B48E24AA"
+            android:background="#9b63f8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
             app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
@@ -201,11 +201,13 @@
         android:id="@+id/constraintLayout8"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:background="#ffebee"
+        app:layout_constraintBottom_toTopOf="@+id/do_image_con"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#BAF4FAED">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Switch
             android:id="@+id/switchTimerMode"
@@ -219,6 +221,7 @@
             android:textColorLink="#00BCD4"
             android:textSize="14sp"
             android:textStyle="italic"
+            android:theme="@style/swithStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -226,8 +229,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintWidth_percent=".35"
-            tools:checked="false"
-            android:theme="@style/swithStyle"/>
+            tools:checked="false" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -245,12 +247,15 @@
             android:id="@+id/imageView5"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:alpha="0.75"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/dog_main_new"/>
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/back" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

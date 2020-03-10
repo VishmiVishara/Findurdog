@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:background="#9dcbdb"
         android:gravity="center|top"
-        android:text="Find Your Dog"
+        android:text="DOGGIE'S PAW"
         android:textColor="@android:color/white"
         android:textSize="40sp"
         app:fontFamily="@font/font_2"
